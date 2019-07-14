@@ -9,6 +9,7 @@
 #include <iostream>
 #include <ctime>
 #include <cstring>
+#include <fstream>
 
 using namespace std;
  
@@ -37,11 +38,21 @@ void printtext(int x, int y, string String)
 }
 
 
-//Szybkosæ spadania
+
+
+//Szybkosï¿½ spadania
 GLint speed= 1000;
 int menu = 0;
 int menuwyb = 0;
 int punkty = 0;
+char imie[64];
+int wpisywanie =0;
+int imieznkow =0;
+int wynikipunkty[6] = {0,0,0,0,0,0};
+char wynikiimie[6][64];
+char wynikippp[6][64];
+
+
 const GLfloat Kolory[8][3] =
 {
     {1,1,1},
@@ -75,7 +86,7 @@ int plan[22][22] =
 {1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0},
 {1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0},
 {1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0},
-{1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0},
+{1,0,0,0,0,0,0,0,0,0,0,1,0,5,5,5,5,5,5,0,0,0},
 {1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0},
 {1,0,0,0,0,0,0,0,0,0,0,1,0,0,3,3,3,3,0,0,0,0},
 {1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0},
@@ -105,6 +116,130 @@ int logo[20][20] =
 {0,1,1,1,1,1,0,3,3,3,3,3,3,3,0,5,0,6,6,0},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
 };
+
+
+int pop[20][20] = 
+{
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,3,3,3,3,3,3,5,5,5,5,5,5,5,0,0,0,0,0},
+{0,0,3,3,3,3,3,3,5,5,5,5,5,5,5,0,0,0,0,0},
+{0,0,3,3,3,3,3,3,5,5,5,5,5,5,5,0,0,0,0,0},
+{0,0,3,3,3,3,3,3,5,5,5,5,5,5,5,0,0,0,0,0},
+{0,0,3,3,3,3,3,3,5,5,5,5,5,5,5,0,0,0,0,0},
+{0,0,3,3,3,3,3,3,5,5,5,5,5,5,5,0,0,0,0,0},
+{0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+{0,0,1,0,2,2,2,0,3,0,4,0,4,4,0,5,0,6,6,0},
+{0,0,1,0,2,0,0,0,3,0,4,0,4,0,0,5,0,0,6,0},
+{0,0,1,0,2,2,0,0,3,0,4,4,4,4,0,5,0,0,6,0},
+{0,0,1,0,2,0,0,0,3,0,4,0,0,4,0,5,0,6,6,0},
+{0,0,1,0,2,2,2,0,3,0,4,4,4,4,0,5,0,6,0,0},
+{0,0,1,0,0,0,0,0,3,0,0,0,0,0,0,5,0,6,0,0},
+{0,1,1,1,1,1,0,3,3,3,3,3,3,3,0,5,0,6,6,0},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
+};
+
+void OdczytZPlku()
+{
+
+ fstream plik;
+    plik.open( "wyniki.txt", ios::in );
+    if( plik.good() )
+    {
+        string napis;
+       int liczba = 0;
+        while( !plik.eof() && ++liczba<6)
+        {
+            getline( plik, napis );
+               for(int i=0;i<11;i++)
+               {
+               wynikiimie[liczba][i]=napis[i];
+               }
+               wynikiimie[liczba][11]=0;
+                 if( wynikiimie[liczba][0]==0)
+                 {
+                    sprintf(wynikiimie[liczba], "Anonim");
+                 }
+               wynikipunkty[liczba]=0;
+                getline( plik, napis );
+                 for(int i=0;i<11;i++)
+               {
+               
+               wynikippp[liczba][i]=napis[i];
+               if (napis[i]==0) break;
+                wynikipunkty[liczba]+=napis[i]-48;
+                wynikipunkty[liczba]*=10;
+               }
+               wynikipunkty[liczba]/=10;
+        }
+        plik.close();
+    }else
+    {
+    fstream plik;
+    plik.open( "wyniki.txt", ios::out );
+    if( plik.good() )
+    {
+       int liczba = 0;
+        while(++liczba<6)
+        {
+               plik<<wynikiimie[liczba]<<endl;
+               plik<<wynikipunkty[liczba]<<endl;
+        }
+        plik.close();
+    } 
+     OdczytZPlku();
+    
+    } 
+}
+
+void ZapiszDoPliku()
+{
+
+
+
+fstream plik;
+    plik.open( "wyniki.txt", ios::out );
+    if( plik.good() )
+    {
+       int wp=0;
+       int liczba = 0;
+        while(++liczba<5)
+        {
+               if(wynikipunkty[liczba]<punkty && wp == 0)
+               {
+               liczba--;
+               plik<<imie<<endl;
+               plik<<punkty<<endl;
+               wp=1;
+               }
+               else{
+               plik<<wynikiimie[liczba]<<endl;
+               plik<<wynikipunkty[liczba]<<endl;
+               }
+        }
+        plik.close();
+    } 
+     OdczytZPlku();
+     menu=4;
+}
+
+void KoniecGry()
+{
+    if(punkty>wynikipunkty[5])
+       {
+       menu=10;
+       }
+      else
+      {
+      menu=11;
+      }
+
+}
+
+
 //objektu
 int obiekt[4][3]=
 {
@@ -233,19 +368,7 @@ void GenerujObjekt()
                 (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
                 (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
                 {
-                    for(int i=1;i<21;i++)
-                    {
-                        plan[i][1] = 0;
-                        plan[i][2] = 0;
-                        plan[i][3] = 0;
-                        plan[i][4] = 0;
-                        plan[i][5] = 0;
-                        plan[i][6] = 0;
-                        plan[i][7] = 0;
-                        plan[i][8] = 0;
-                        plan[i][9] = 0;
-                        plan[i][10] = 0;
-                        }
+                    KoniecGry();
                 }
 }
 
@@ -745,7 +868,67 @@ void Wypelni()
     if(j == obiekt2[3][1] && i == obiekt2[3][0])
         glColor3fv(Kolory[obiekt2[3][2]]);
 
+   if( (wpisywanie == 1 || menu ==11 || menu==22)&& j == 15 && i >11 &&  i<20)
+    glColor3fv(Kolory[6]);
+    
+       if( wpisywanie == 1 && j == 13 && i >12 &&  i<19)
+    glColor3fv(Kolory[1]);
+        
+     glBegin( GL_QUADS );
+       glVertex3f( Sxl , Syl, 0);
+       glVertex3f( Sxh , Syl , 0);
+       glVertex3f( Sxh , Syh , 0); 
+       glVertex3f( Sxl , Syh , 0); 
+     glEnd();
+     
+     Sxl+=0.1;
+     Sxh+=0.1;
+     
+     }
+     Syl+=0.1;
+     Syh+=0.1;
+     }
 
+}
+
+
+void Pomoc()
+{
+  GLfloat Syh=-1.0,Syl=-0.9,Sxl=-1.0,Sxh=-0.9;
+
+    for(int j=0;j<20;j++)
+    {
+    Sxl=-1.0;
+    Sxh=-0.9;
+    
+    
+    
+    for(int i=0;i<20;i++)
+    {
+    if((i+j)%2==0)
+        glColor3f(0, 0.1, 0); 
+    else
+        glColor3f(0, 0, 0.1); 
+        
+    if(pop[j][i] != 0)
+    {
+        glColor3fv(Kolory[pop[j][i]]);
+    }    
+
+     if((pop[j][i]==7 && menuwyb == 0 && j==9) ||
+        (pop[j][i]==7 && menuwyb == 1 && j==7) ||
+        (pop[j][i]==7 && menuwyb == 2 && j==5) ||
+        (pop[j][i]==7 && menuwyb == 3 && j==3) ||
+        (pop[j][i]==7 && menuwyb == 4 && j==1))
+        glColor3fv(Kolory[0]);
+        
+        if((pop[j][i]==7 && menu == 4 && j==9) ||
+        (pop[j][i]==7 && menu == 4 && j==7) ||
+        (pop[j][i]==7 && menu == 4 && j==5) ||
+        (pop[j][i]==7 && menu == 4 && j==3) ||
+        (pop[j][i]==7 && menu == 4 && j==1))
+        glColor3fv(Kolory[3]);
+        
         
      glBegin( GL_QUADS );
        glVertex3f( Sxl , Syl, 0);
@@ -795,6 +978,14 @@ void Logo()
         (logo[j][i]==7 && menuwyb == 4 && j==1))
         glColor3fv(Kolory[0]);
         
+        if((logo[j][i]==7 && menu == 4 && j==9) ||
+        (logo[j][i]==7 && menu == 4 && j==7) ||
+        (logo[j][i]==7 && menu == 4 && j==5) ||
+        (logo[j][i]==7 && menu == 4 && j==3) ||
+        (logo[j][i]==7 && menu == 4 && j==1))
+        glColor3fv(Kolory[3]);
+        
+        
      glBegin( GL_QUADS );
        glVertex3f( Sxl , Syl, 0);
        glVertex3f( Sxh , Syl , 0);
@@ -816,6 +1007,8 @@ void Logo()
 
 void MenuG()
 {
+
+
 glColor3f(0, 0, 0);
 char string[64];
 
@@ -848,13 +1041,115 @@ char string[64];
     sprintf(string, "%i",punkty);
     printtext(460,540,string);
     
+    printtext(370,483,wynikiimie[1]);
+    printtext(490,483,wynikippp[1]);
     
+    if(menu ==10)
+    {
+    sprintf(string, "Podaj imie i koncz [ESC]");
+    printtext(332,426,string);
+    }
+    
+    if(menu ==11)
+    {
+    sprintf(string, "Przegrales i koncz [ESC]");
+    printtext(332,426,string);
+    }
+   
 }
 
-// funkcja generuj¹ca scenê 3D
+void Pauza()
+{
+glColor3f(0, 0, 0);
+char string[64];
+    sprintf(string, "Pauza! Kliknij [P] i graj");
+    printtext(332,426,string);
+}
+
+void PomocTekst()
+{
+glColor3f(0, 0, 0);
+char string[64];
+
+    sprintf(string, "Sterowanie:");
+    printtext(90,280,string);
+    sprintf(string, "Strzalki:");
+    printtext(80,256,string);
+    sprintf(string, "W gore - obrot");
+    printtext(80,232,string);
+    sprintf(string, "W dol - opadanie");
+    printtext(80,209,string);
+    sprintf(string, "W prawo");
+    printtext(80,183,string);
+    sprintf(string, "W lewo");
+    printtext(80,157,string);
+    
+    
+    sprintf(string, "Inne:");
+    printtext(250,256,string);
+    sprintf(string, "[ESC] Wyjscie/Powrot");
+    printtext(250,232,string);
+    sprintf(string, "[SPACJA] Wybor z Menu");
+    printtext(250,209,string);
+    sprintf(string, "[F1] Pomoc");
+    printtext(250,183,string);
+    sprintf(string, "[P] Pauza");
+    printtext(250,157,string);
+
+
+}
+
+void NowaGra()
+{
+     for(int i=1;i<21;i++)
+     {
+        plan[i][1] = 0;
+        plan[i][2] = 0;
+        plan[i][3] = 0;
+        plan[i][4] = 0;
+        plan[i][5] = 0;
+        plan[i][6] = 0;
+        plan[i][7] = 0;
+        plan[i][8] = 0;
+        plan[i][9] = 0;
+        plan[i][10] = 0;
+    }
+    punkty =0;
+    GenerujNext();
+    GenerujObjekt();   
+    GenerujNext(); 
+}
+
+
+
+
+
+void NajWyniki()
+{
+glColor3f(0, 0, 0);
+
+    int nop = 0;
+    int liczba = 0;
+        while(++liczba<6)
+        {
+           printtext(220,281-nop,wynikiimie[liczba]);
+           printtext(340,281-nop,wynikippp[liczba]);
+           nop+=57;
+        }
+}
+
+void Zapisz()
+{
+    wpisywanie = 1;
+    char string[64];
+    sprintf(string, imie);
+    printtext(390,369,string);
+}
+
+// funkcja generujï¿½ca scenï¿½ 3D
 void Display()
 {   
-    //Generowanie t³a
+    //Generowanie tï¿½a
     glClearColor(1, 1, 1, 1);        
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
  
@@ -874,22 +1169,47 @@ void Display()
     MenuG();
     }
     
+    //Pomoc
     if (menu == 2){
-    Logo();
+    Pomoc();
+    PomocTekst();
     }
     
     if (menu == 3){
     Logo();
     }
     
+    //Wyniki
     if (menu == 4){
     Logo();
+    NajWyniki();
     }
     
+    
+    //KoniecGry
+    if (menu == 10)
+    {
+    Wypelni();
+    GameTekst();
+    Zapisz();
+    }
+    
+    if (menu == 11)
+    {
+    Wypelni();
+    GameTekst();
+    }
+        if (menu == 22)
+    {
+    Wypelni();
+    GameTekst();
+    Pauza();
+    }
 
-    // skierowanie poleceñ do wykonania
+    
+    // skierowanie poleceï¿½ do wykonania
     glFlush();    
-    // zamiana buforów koloru
+    // zamiana buforï¿½w koloru
     glutSwapBuffers();
 }
 
@@ -897,9 +1217,9 @@ void Timer( int value )
 {   if (menu == 1){
     PrzesunObiekt();  
     } 
-    // wyœwietlenie sceny
+    // wyï¿½wietlenie sceny
     Display();    
-    // nastêpne wywo³anie funkcji timera
+    // nastï¿½pne wywoï¿½anie funkcji timera
     glutTimerFunc( speed, Timer, 0 );
 }
 
@@ -919,14 +1239,27 @@ void Reshape(int width, int height)
 
 void Keyboard( unsigned char key, int x, int y )
 {   
-    if(key == ' ')
+    OdczytZPlku();
+
+  if((key == 'P' || key == 'p') && menu == 1)
+    {
+        menu = 22;
+        key=0;
+  }
+  if((key == 'P' || key == 'p') && menu == 22)
+    {
+        menu = 1;
+  }
+  
+
+    if(key == ' ' && menu == 0)
     {
     
          switch(menuwyb)      
     {  
         case 0:
         menu = 1;
-        GenerujNext();
+        NowaGra();
         break; 
         
         case 1:
@@ -937,8 +1270,10 @@ void Keyboard( unsigned char key, int x, int y )
         menu = 3;
         break; 
         
+        //Wyniki
         case 3:
         menu = 4;
+        
         break; 
         
         case 4:
@@ -948,7 +1283,32 @@ void Keyboard( unsigned char key, int x, int y )
     };
     }
     
-    if(key == 27 && menu == 0)//ESC
+    if(wpisywanie == 1 && ((key >= 48 && key <= 57) || (key >= 65 && key <= 90) || (key >= 97 && key <=122)) && imieznkow <=10 )
+    {
+        imie[imieznkow] = key;
+        imieznkow++;
+        
+    }
+    
+    if(wpisywanie == 1 && key == 8 && imieznkow > 0)
+    {
+        imieznkow--;
+        imie[imieznkow] = 0;
+    }
+    
+    
+    if(key == 27 && wpisywanie == 1)
+    {
+        menu=0;
+        wpisywanie=0;
+        key =0;
+        ZapiszDoPliku();
+    }
+    else if(key == 27 && menu == 11)
+    {
+        menu=4;
+    }
+    else if(key == 27 && menu == 0)//ESC
     {
         exit( 0 );
     }
@@ -961,6 +1321,21 @@ void Keyboard( unsigned char key, int x, int y )
 }
 void Znaki_Spec(int key, int x, int y)
 { 
+
+    if(key == GLUT_KEY_F1 && menu==1)
+    {
+        menu =2;
+        key =0;
+    }
+    
+    if(key == GLUT_KEY_F1 && menu==2)
+    {
+        menu =1;
+        key =0;
+    }
+    
+
+
     if (menu == 1)
     {
     switch(key)      
@@ -1013,6 +1388,8 @@ void Znaki_Spec(int key, int x, int y)
 
 int main( int argc, char * argv[] )
 {   
+
+    OdczytZPlku();
     srand(time(NULL));
     glutInit(& argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
