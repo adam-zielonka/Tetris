@@ -1099,6 +1099,40 @@ char string[64];
 
 }
 
+
+void UstawieniaTekst()
+{
+glColor3f(0, 0, 0);
+char string[64];
+
+    sprintf(string, "Ustawienia:");
+    printtext(90,280,string);
+    sprintf(string, "Pretkosc [+][-]");
+    printtext(80,256,string);
+    sprintf(string, " ");
+    printtext(80,232,string);
+    sprintf(string, " ");
+    printtext(80,209,string);
+    sprintf(string, " ");
+    printtext(80,183,string);
+    sprintf(string, " ");
+    printtext(80,157,string);
+    
+    
+    sprintf(string,"%i" ,speed);
+    printtext(250,256,string);
+    sprintf(string, " ");
+    printtext(250,232,string);
+    sprintf(string, " ");
+    printtext(250,209,string);
+    sprintf(string, " ");
+    printtext(250,183,string);
+    sprintf(string, " ");
+    printtext(250,157,string);
+
+
+}
+
 void NowaGra()
 {
      for(int i=1;i<21;i++)
@@ -1174,9 +1208,10 @@ void Display()
     Pomoc();
     PomocTekst();
     }
-    
+    //Ustawieni    
     if (menu == 3){
-    Logo();
+    Pomoc();
+    UstawieniaTekst();
     }
     
     //Wyniki
@@ -1249,6 +1284,16 @@ void Keyboard( unsigned char key, int x, int y )
   if((key == 'P' || key == 'p') && menu == 22)
     {
         menu = 1;
+  }
+  
+  
+  if(key == '+' && speed<2000)
+  {
+        speed+=100;
+  }
+  if(key == '-' && speed>0)
+  {
+        speed-=100;
   }
   
 
