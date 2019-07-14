@@ -1,6 +1,7 @@
-//apt install mesa-common-dev libglu1-mesa-dev freeglut3-dev  -y
+//sudo add-apt-repository universe
+//sudo apt install mesa-common-dev libglu1-mesa-dev freeglut3-dev  -y
 //g++ -p -Wall -pedantic -o tetris.out tetris.cpp -lGL -lGLU -lglut -lm -std=c++0x 
-//LIBGL_ALWAYS_INDIRECT=1 ./tetris.out
+//./tetris.out
 #include <stdlib.h>
 #include <math.h>
 #include <stdio.h>
