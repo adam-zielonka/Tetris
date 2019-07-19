@@ -265,54 +265,7 @@ int nastepny = 0;
 void GenerujNext()
 {
     nastepny = rand()%(0-7)+0;
-    
-    switch(nastepny)      
-    {  
-        case 0://Kwadrad
-            setPosition(obiekt2[0], 15,7,1);
-            setPosition(obiekt2[1], 15,6,1);
-            setPosition(obiekt2[2], 16,7,1);
-            setPosition(obiekt2[3], 16,6,1);
-        break; 
-        case 1://Linika
-            setPosition(obiekt2[0], 15,7,2);
-            setPosition(obiekt2[1], 15,6,2);
-            setPosition(obiekt2[2], 15,5,2);
-            setPosition(obiekt2[3], 15,4,2);
-        break;  
-        case 2://L
-            setPosition(obiekt2[0], 15,7,3);
-            setPosition(obiekt2[1], 15,6,3);
-            setPosition(obiekt2[2], 15,5,3);
-            setPosition(obiekt2[3], 16,5,3);
-        break; 
-        case 3://ReversL
-            setPosition(obiekt2[0], 16,7,4);
-            setPosition(obiekt2[1], 16,6,4);
-            setPosition(obiekt2[2], 16,5,4);
-            setPosition(obiekt2[3], 15,5,4);
-        break;
-        case 4://Z
-            setPosition(obiekt2[0], 14,7,5);
-            setPosition(obiekt2[1], 15,7,5);
-            setPosition(obiekt2[2], 15,6,5);
-            setPosition(obiekt2[3], 16,6,5);
-        break;
-        case 5://ReversZ
-            setPosition(obiekt2[0], 16,7,6);
-            setPosition(obiekt2[1], 15,7,6);
-            setPosition(obiekt2[2], 15,6,6);
-            setPosition(obiekt2[3], 14,6,6);
-        break;
-        case 6://Nosek
-            setPosition(obiekt2[0], 15,7,7);
-            setPosition(obiekt2[1], 15,6,7);
-            setPosition(obiekt2[2], 15,5,7);
-            setPosition(obiekt2[3], 16,6,7);
-        break;        
-
-    }
-    
+    drawNextFigure(obiekt2, nastepny);  
 }
 
 
