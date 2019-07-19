@@ -26,6 +26,10 @@ g++ -p -Wall -pedantic -o tetris.out tetris.cpp -lGL -lGLU -lglut -lm -std=c++0x
 ./tetris.out
 ```
 
+## Run on WSL
+
+You can find more on this link: [Does WSL support openGL?](https://github.com/microsoft/WSL/issues/2855#issuecomment-358861903)
+
 ## Screens
 
 ![](./img/tetris-menu.png)
