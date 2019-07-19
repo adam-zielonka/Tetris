@@ -1,14 +1,63 @@
 using namespace std;
 
-void setPosition(int* point, int x, int y, int color) {
+void setPosition(int point[3], int x, int y, int color) {
   point[0] = x;
   point[1] = y;
   point[2] = color;
 }
 
-void updatePosition(int* point, int x, int y) {
+void updatePosition(int point[3], int x, int y) {
   point[0] += x;
   point[1] += y;
+}
+
+void drawFigure(int figure[4][3], int code) {
+  int color = code + 1;
+
+  switch(code) {
+    case 0://Square
+      setPosition(figure[0], 5, 20, color);
+      setPosition(figure[1], 5, 19, color);
+      setPosition(figure[2], 6, 20, color);
+      setPosition(figure[3], 6, 19, color);
+      break; 
+    case 1://Line
+      setPosition(figure[0], 5, 20, color);
+      setPosition(figure[1], 5, 19, color);
+      setPosition(figure[2], 5, 18, color);
+      setPosition(figure[3], 5, 17, color);
+      break;  
+    case 2://L
+      setPosition(figure[0], 5, 20, color);
+      setPosition(figure[1], 5, 19, color);
+      setPosition(figure[2], 5, 18, color);
+      setPosition(figure[3], 6, 18, color);
+      break; 
+    case 3://Mirrored L
+      setPosition(figure[0], 6, 20, color);
+      setPosition(figure[1], 6, 19, color);
+      setPosition(figure[2], 6, 18, color);
+      setPosition(figure[3], 5, 18, color);
+      break;
+    case 4://Z
+      setPosition(figure[0], 4, 20, color);
+      setPosition(figure[1], 5, 20, color);
+      setPosition(figure[2], 5, 19, color);
+      setPosition(figure[3], 6, 19, color);
+      break;
+    case 5://Mirrored Z
+      setPosition(figure[0], 6, 20, color);
+      setPosition(figure[1], 5, 20, color);
+      setPosition(figure[2], 5, 19, color);
+      setPosition(figure[3], 4, 19, color);
+      break;
+    case 6://Nose
+      setPosition(figure[0], 5, 20, color);
+      setPosition(figure[1], 5, 19, color);
+      setPosition(figure[2], 5, 18, color);
+      setPosition(figure[3], 6, 19, color);
+      break;
+  }
 }
 
 void drawNextFigure(int figure[4][3], int code) {

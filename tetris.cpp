@@ -268,64 +268,18 @@ void GenerujNext()
     drawNextFigure(obiekt2, nastepny);  
 }
 
-
 void GenerujObjekt()
 {
     gen = nastepny;
+    drawFigure(obiekt, gen);
 
-    switch(gen)      
-    {  
-        case 0://Kwadrad
-            setPosition(obiekt[0], 5,20,1);
-            setPosition(obiekt[1], 5,19,1);
-            setPosition(obiekt[2], 6,20,1);
-            setPosition(obiekt[3], 6,19,1);
-        break; 
-        case 1://Linika
-            setPosition(obiekt[0], 5,20,2);
-            setPosition(obiekt[1], 5,19,2);
-            setPosition(obiekt[2], 5,18,2);
-            setPosition(obiekt[3], 5,17,2);
-        break;  
-        case 2://L
-            setPosition(obiekt[0], 5,20,3);
-            setPosition(obiekt[1], 5,19,3);
-            setPosition(obiekt[2], 5,18,3);
-            setPosition(obiekt[3], 6,18,3);
-        break; 
-        case 3://ReversL
-            setPosition(obiekt[0], 6,20,4);
-            setPosition(obiekt[1], 6,19,4);
-            setPosition(obiekt[2], 6,18,4);
-            setPosition(obiekt[3], 5,18,4);
-        break;
-        case 4://Z
-            setPosition(obiekt[0], 4,20,5);
-            setPosition(obiekt[1], 5,20,5);
-            setPosition(obiekt[2], 5,19,5);
-            setPosition(obiekt[3], 6,19,5);
-        break;
-        case 5://ReversZ
-            setPosition(obiekt[0], 6,20,6);
-            setPosition(obiekt[1], 5,20,6);
-            setPosition(obiekt[2], 5,19,6);
-            setPosition(obiekt[3], 4,19,6);
-        break;
-        case 6://Nosek
-            setPosition(obiekt[0], 5,20,7);
-            setPosition(obiekt[1], 5,19,7);
-            setPosition(obiekt[2], 5,18,7);
-            setPosition(obiekt[3], 6,19,7);
-        break;        
-
+    if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
+    (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
+    (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
+    (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
+    {
+        KoniecGry();
     }
-                if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
-                (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
-                (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
-                (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
-                {
-                    KoniecGry();
-                }
 }
 
 void Obruc()
