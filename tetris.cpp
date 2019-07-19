@@ -12,6 +12,7 @@
 #include <ctime>
 #include <cstring>
 #include <fstream>
+#include "utils.cpp"
 
 using namespace std;
  
@@ -261,12 +262,6 @@ int obiekt2[4][3]=
 int gen = 0;
 int nastepny = 0;
 
-void arrayUpdate(int* tab, int i1, int i2, int i3) {
-    tab[0] = i1;
-    tab[1] = i2;
-    tab[2] = i3;
-}
-
 void GenerujNext()
 {
     nastepny = rand()%(0-7)+0;
@@ -274,46 +269,46 @@ void GenerujNext()
     switch(nastepny)      
     {  
         case 0://Kwadrad
-            arrayUpdate(obiekt2[0], 15,7,1);
-            arrayUpdate(obiekt2[1], 15,6,1);
-            arrayUpdate(obiekt2[2], 16,7,1);
-            arrayUpdate(obiekt2[3], 16,6,1);
+            setPosition(obiekt2[0], 15,7,1);
+            setPosition(obiekt2[1], 15,6,1);
+            setPosition(obiekt2[2], 16,7,1);
+            setPosition(obiekt2[3], 16,6,1);
         break; 
         case 1://Linika
-            arrayUpdate(obiekt2[0], 15,7,2);
-            arrayUpdate(obiekt2[1], 15,6,2);
-            arrayUpdate(obiekt2[2], 15,5,2);
-            arrayUpdate(obiekt2[3], 15,4,2);
+            setPosition(obiekt2[0], 15,7,2);
+            setPosition(obiekt2[1], 15,6,2);
+            setPosition(obiekt2[2], 15,5,2);
+            setPosition(obiekt2[3], 15,4,2);
         break;  
         case 2://L
-            arrayUpdate(obiekt2[0], 15,7,3);
-            arrayUpdate(obiekt2[1], 15,6,3);
-            arrayUpdate(obiekt2[2], 15,5,3);
-            arrayUpdate(obiekt2[3], 16,5,3);
+            setPosition(obiekt2[0], 15,7,3);
+            setPosition(obiekt2[1], 15,6,3);
+            setPosition(obiekt2[2], 15,5,3);
+            setPosition(obiekt2[3], 16,5,3);
         break; 
         case 3://ReversL
-            arrayUpdate(obiekt2[0], 16,7,4);
-            arrayUpdate(obiekt2[1], 16,6,4);
-            arrayUpdate(obiekt2[2], 16,5,4);
-            arrayUpdate(obiekt2[3], 15,5,4);
+            setPosition(obiekt2[0], 16,7,4);
+            setPosition(obiekt2[1], 16,6,4);
+            setPosition(obiekt2[2], 16,5,4);
+            setPosition(obiekt2[3], 15,5,4);
         break;
         case 4://Z
-            arrayUpdate(obiekt2[0], 14,7,5);
-            arrayUpdate(obiekt2[1], 15,7,5);
-            arrayUpdate(obiekt2[2], 15,6,5);
-            arrayUpdate(obiekt2[3], 16,6,5);
+            setPosition(obiekt2[0], 14,7,5);
+            setPosition(obiekt2[1], 15,7,5);
+            setPosition(obiekt2[2], 15,6,5);
+            setPosition(obiekt2[3], 16,6,5);
         break;
         case 5://ReversZ
-            arrayUpdate(obiekt2[0], 16,7,6);
-            arrayUpdate(obiekt2[1], 15,7,6);
-            arrayUpdate(obiekt2[2], 15,6,6);
-            arrayUpdate(obiekt2[3], 14,6,6);
+            setPosition(obiekt2[0], 16,7,6);
+            setPosition(obiekt2[1], 15,7,6);
+            setPosition(obiekt2[2], 15,6,6);
+            setPosition(obiekt2[3], 14,6,6);
         break;
         case 6://Nosek
-            arrayUpdate(obiekt2[0], 15,7,7);
-            arrayUpdate(obiekt2[1], 15,6,7);
-            arrayUpdate(obiekt2[2], 15,5,7);
-            arrayUpdate(obiekt2[3], 16,6,7);
+            setPosition(obiekt2[0], 15,7,7);
+            setPosition(obiekt2[1], 15,6,7);
+            setPosition(obiekt2[2], 15,5,7);
+            setPosition(obiekt2[3], 16,6,7);
         break;        
 
     }
@@ -328,46 +323,46 @@ void GenerujObjekt()
     switch(gen)      
     {  
         case 0://Kwadrad
-            arrayUpdate(obiekt[0], 5,20,1);
-            arrayUpdate(obiekt[1], 5,19,1);
-            arrayUpdate(obiekt[2], 6,20,1);
-            arrayUpdate(obiekt[3], 6,19,1);
+            setPosition(obiekt[0], 5,20,1);
+            setPosition(obiekt[1], 5,19,1);
+            setPosition(obiekt[2], 6,20,1);
+            setPosition(obiekt[3], 6,19,1);
         break; 
         case 1://Linika
-            arrayUpdate(obiekt[0], 5,20,2);
-            arrayUpdate(obiekt[1], 5,19,2);
-            arrayUpdate(obiekt[2], 5,18,2);
-            arrayUpdate(obiekt[3], 5,17,2);
+            setPosition(obiekt[0], 5,20,2);
+            setPosition(obiekt[1], 5,19,2);
+            setPosition(obiekt[2], 5,18,2);
+            setPosition(obiekt[3], 5,17,2);
         break;  
         case 2://L
-            arrayUpdate(obiekt[0], 5,20,3);
-            arrayUpdate(obiekt[1], 5,19,3);
-            arrayUpdate(obiekt[2], 5,18,3);
-            arrayUpdate(obiekt[3], 6,18,3);
+            setPosition(obiekt[0], 5,20,3);
+            setPosition(obiekt[1], 5,19,3);
+            setPosition(obiekt[2], 5,18,3);
+            setPosition(obiekt[3], 6,18,3);
         break; 
         case 3://ReversL
-            arrayUpdate(obiekt[0], 6,20,4);
-            arrayUpdate(obiekt[1], 6,19,4);
-            arrayUpdate(obiekt[2], 6,18,4);
-            arrayUpdate(obiekt[3], 5,18,4);
+            setPosition(obiekt[0], 6,20,4);
+            setPosition(obiekt[1], 6,19,4);
+            setPosition(obiekt[2], 6,18,4);
+            setPosition(obiekt[3], 5,18,4);
         break;
         case 4://Z
-            arrayUpdate(obiekt[0], 4,20,5);
-            arrayUpdate(obiekt[1], 5,20,5);
-            arrayUpdate(obiekt[2], 5,19,5);
-            arrayUpdate(obiekt[3], 6,19,5);
+            setPosition(obiekt[0], 4,20,5);
+            setPosition(obiekt[1], 5,20,5);
+            setPosition(obiekt[2], 5,19,5);
+            setPosition(obiekt[3], 6,19,5);
         break;
         case 5://ReversZ
-            arrayUpdate(obiekt[0], 6,20,6);
-            arrayUpdate(obiekt[1], 5,20,6);
-            arrayUpdate(obiekt[2], 5,19,6);
-            arrayUpdate(obiekt[3], 4,19,6);
+            setPosition(obiekt[0], 6,20,6);
+            setPosition(obiekt[1], 5,20,6);
+            setPosition(obiekt[2], 5,19,6);
+            setPosition(obiekt[3], 4,19,6);
         break;
         case 6://Nosek
-            arrayUpdate(obiekt[0], 5,20,7);
-            arrayUpdate(obiekt[1], 5,19,7);
-            arrayUpdate(obiekt[2], 5,18,7);
-            arrayUpdate(obiekt[3], 6,19,7);
+            setPosition(obiekt[0], 5,20,7);
+            setPosition(obiekt[1], 5,19,7);
+            setPosition(obiekt[2], 5,18,7);
+            setPosition(obiekt[3], 6,19,7);
         break;        
 
     }
@@ -388,327 +383,327 @@ void Obruc()
 
         break; 
         case 1://Linika
-            arrayUpdate(obiekt[0], obiekt[0][0]-1,obiekt[0][1]-2,2);
-            arrayUpdate(obiekt[1], obiekt[1][0],obiekt[1][1]-1,2);
-            arrayUpdate(obiekt[2], obiekt[2][0]+1,obiekt[2][1],2);
-            arrayUpdate(obiekt[3], obiekt[3][0]+2,obiekt[3][1]+1,2);
+            updatePosition(obiekt[0], -1, -2);
+            updatePosition(obiekt[1], 0, -1);
+            updatePosition(obiekt[2], +1, 0);
+            updatePosition(obiekt[3], +2, +1);
             gen = 11;
                 if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
                 (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
                 (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
                 (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
                 {
-                    arrayUpdate(obiekt[0], obiekt[0][0]+1,obiekt[0][1]+2,2);
-                    arrayUpdate(obiekt[1], obiekt[1][0],obiekt[1][1]+1,2);
-                    arrayUpdate(obiekt[2], obiekt[2][0]-1,obiekt[2][1],2);
-                    arrayUpdate(obiekt[3], obiekt[3][0]-2,obiekt[3][1]-1,2);
+                    updatePosition(obiekt[0], +1, +2);
+                    updatePosition(obiekt[1], 0, +1);
+                    updatePosition(obiekt[2], -1, 0);
+                    updatePosition(obiekt[3], -2, -1);
                     gen = 1;
                 }
         break;  
         case 11://Linika
-            arrayUpdate(obiekt[0], obiekt[0][0]+1,obiekt[0][1]+2,2);
-            arrayUpdate(obiekt[1], obiekt[1][0],obiekt[1][1]+1,2);
-            arrayUpdate(obiekt[2], obiekt[2][0]-1,obiekt[2][1],2);
-            arrayUpdate(obiekt[3], obiekt[3][0]-2,obiekt[3][1]-1,2);
+            updatePosition(obiekt[0], +1, +2);
+            updatePosition(obiekt[1], 0, +1);
+            updatePosition(obiekt[2], -1, 0);
+            updatePosition(obiekt[3], -2, -1);
             gen = 1;
                 if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
                 (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
                 (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
                 (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
                 {
-                    arrayUpdate(obiekt[0], obiekt[0][0]-1,obiekt[0][1]-2,2);
-                    arrayUpdate(obiekt[1], obiekt[1][0],obiekt[1][1]-1,2);
-                    arrayUpdate(obiekt[2], obiekt[2][0]+1,obiekt[2][1],2);
-                    arrayUpdate(obiekt[3], obiekt[3][0]+2,obiekt[3][1]+1,2);
+                    updatePosition(obiekt[0], -1, -2);
+                    updatePosition(obiekt[1], 0, -1);
+                    updatePosition(obiekt[2], +1, 0);
+                    updatePosition(obiekt[3], +2, +1);
                     gen = 11;
                 }
         break;  
         case 2://L
-            arrayUpdate(obiekt[0], obiekt[0][0],obiekt[0][1]-2,3);
-            arrayUpdate(obiekt[1], obiekt[1][0]+1,obiekt[1][1]-1,3);
-            arrayUpdate(obiekt[2], obiekt[2][0]+2,obiekt[2][1],3);
-            arrayUpdate(obiekt[3], obiekt[3][0]+1,obiekt[3][1]+1,3);
+            updatePosition(obiekt[0], 0, -2);
+            updatePosition(obiekt[1], +1, -1);
+            updatePosition(obiekt[2], +2, 0);
+            updatePosition(obiekt[3], +1, +1);
             gen = 22;
                 if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
                 (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
                 (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
                 (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
                 {
-            arrayUpdate(obiekt[0], obiekt[0][0],obiekt[0][1]+2,3);
-            arrayUpdate(obiekt[1], obiekt[1][0]-1,obiekt[1][1]+1,3);
-            arrayUpdate(obiekt[2], obiekt[2][0]-2,obiekt[2][1],3);
-            arrayUpdate(obiekt[3], obiekt[3][0]-1,obiekt[3][1]-1,3);
+            updatePosition(obiekt[0], 0, +2);
+            updatePosition(obiekt[1], -1, +1);
+            updatePosition(obiekt[2], -2, 0);
+            updatePosition(obiekt[3], -1, -1);
                     gen = 2;
                 }
         break; 
         case 22://L
-            arrayUpdate(obiekt[0], obiekt[0][0]+2,obiekt[0][1],3);
-            arrayUpdate(obiekt[1], obiekt[1][0]+1,obiekt[1][1]+1,3);
-            arrayUpdate(obiekt[2], obiekt[2][0],obiekt[2][1]+2,3);
-            arrayUpdate(obiekt[3], obiekt[3][0]-1,obiekt[3][1]+1,3);
+            updatePosition(obiekt[0], +2, 0);
+            updatePosition(obiekt[1], +1, +1);
+            updatePosition(obiekt[2], 0, +2);
+            updatePosition(obiekt[3], -1, +1);
             gen = 23;
                 if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
                 (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
                 (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
                 (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
                 {
-                    arrayUpdate(obiekt[0], obiekt[0][0]-2,obiekt[0][1],3);
-                    arrayUpdate(obiekt[1], obiekt[1][0]-1,obiekt[1][1]-1,3);
-                    arrayUpdate(obiekt[2], obiekt[2][0],obiekt[2][1]-2,3);
-                    arrayUpdate(obiekt[3], obiekt[3][0]+1,obiekt[3][1]-1,3);
+                    updatePosition(obiekt[0], -2, 0);
+                    updatePosition(obiekt[1], -1, -1);
+                    updatePosition(obiekt[2], 0, -2);
+                    updatePosition(obiekt[3], +1, -1);
                     gen = 22;
                 }
         break;
         case 23://L
-            arrayUpdate(obiekt[0], obiekt[0][0],obiekt[0][1]+2,3);
-            arrayUpdate(obiekt[1], obiekt[1][0]-1,obiekt[1][1]+1,3);
-            arrayUpdate(obiekt[2], obiekt[2][0]-2,obiekt[2][1],3);
-            arrayUpdate(obiekt[3], obiekt[3][0]-1,obiekt[3][1]-1,3);
+            updatePosition(obiekt[0], 0, +2);
+            updatePosition(obiekt[1], -1, +1);
+            updatePosition(obiekt[2], -2, 0);
+            updatePosition(obiekt[3], -1, -1);
             gen = 24;
                 if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
                 (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
                 (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
                 (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
                 {
-            arrayUpdate(obiekt[0], obiekt[0][0],obiekt[0][1]-2,3);
-            arrayUpdate(obiekt[1], obiekt[1][0]+1,obiekt[1][1]-1,3);
-            arrayUpdate(obiekt[2], obiekt[2][0]+2,obiekt[2][1],3);
-            arrayUpdate(obiekt[3], obiekt[3][0]+1,obiekt[3][1]+1,3);
+            updatePosition(obiekt[0], 0, -2);
+            updatePosition(obiekt[1], +1, -1);
+            updatePosition(obiekt[2], +2, 0);
+            updatePosition(obiekt[3], +1, +1);
             gen = 23;
                 }
         break;
         case 24://L
-            arrayUpdate(obiekt[0], obiekt[0][0]-2,obiekt[0][1],3);
-            arrayUpdate(obiekt[1], obiekt[1][0]-1,obiekt[1][1]-1,3);
-            arrayUpdate(obiekt[2], obiekt[2][0],obiekt[2][1]-2,3);
-            arrayUpdate(obiekt[3], obiekt[3][0]+1,obiekt[3][1]-1,3);
+            updatePosition(obiekt[0], -2, 0);
+            updatePosition(obiekt[1], -1, -1);
+            updatePosition(obiekt[2], 0, -2);
+            updatePosition(obiekt[3], +1, -1);
             gen = 2;
                 if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
                 (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
                 (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
                 (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
                 {
-            arrayUpdate(obiekt[0], obiekt[0][0]+2,obiekt[0][1],3);
-            arrayUpdate(obiekt[1], obiekt[1][0]+1,obiekt[1][1]+1,3);
-            arrayUpdate(obiekt[2], obiekt[2][0],obiekt[2][1]+2,3);
-            arrayUpdate(obiekt[3], obiekt[3][0]-1,obiekt[3][1]+1,3);
+            updatePosition(obiekt[0], +2, 0);
+            updatePosition(obiekt[1], +1, +1);
+            updatePosition(obiekt[2], 0, +2);
+            updatePosition(obiekt[3], -1, +1);
             gen = 24;
                 }
         break;
         case 3://ReversL
-            arrayUpdate(obiekt[0], obiekt[0][0]-2,obiekt[0][1],4);
-            arrayUpdate(obiekt[1], obiekt[1][0]-1,obiekt[1][1]+1,4);
-            arrayUpdate(obiekt[2], obiekt[2][0],obiekt[2][1]+2,4);
-            arrayUpdate(obiekt[3], obiekt[3][0]+1,obiekt[3][1]+1,4);
+            updatePosition(obiekt[0], -2, 0);
+            updatePosition(obiekt[1], -1, +1);
+            updatePosition(obiekt[2], 0, +2);
+            updatePosition(obiekt[3], +1, +1);
             gen = 32;
                 if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
                 (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
                 (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
                 (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
                 {
-            arrayUpdate(obiekt[0], obiekt[0][0]+2,obiekt[0][1],4);
-            arrayUpdate(obiekt[1], obiekt[1][0]+1,obiekt[1][1]-1,4);
-            arrayUpdate(obiekt[2], obiekt[2][0],obiekt[2][1]-2,4);
-            arrayUpdate(obiekt[3], obiekt[3][0]-1,obiekt[3][1]-1,4);
+            updatePosition(obiekt[0], +2, 0);
+            updatePosition(obiekt[1], +1, -1);
+            updatePosition(obiekt[2], 0, -2);
+            updatePosition(obiekt[3], -1, -1);
                     gen = 3;
                 }
         break; 
         case 32://RL
-            arrayUpdate(obiekt[0], obiekt[0][0],obiekt[0][1]-2,4);
-            arrayUpdate(obiekt[1], obiekt[1][0]-1,obiekt[1][1]-1,4);
-            arrayUpdate(obiekt[2], obiekt[2][0]-2,obiekt[2][1],4);
-            arrayUpdate(obiekt[3], obiekt[3][0]-1,obiekt[3][1]+1,4);
+            updatePosition(obiekt[0], 0, -2);
+            updatePosition(obiekt[1], -1, -1);
+            updatePosition(obiekt[2], -2, 0);
+            updatePosition(obiekt[3], -1, +1);
             gen = 33;
                 if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
                 (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
                 (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
                 (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
                 {
-            arrayUpdate(obiekt[0], obiekt[0][0],obiekt[0][1]+2,4);
-            arrayUpdate(obiekt[1], obiekt[1][0]+1,obiekt[1][1]+1,4);
-            arrayUpdate(obiekt[2], obiekt[2][0]+2,obiekt[2][1],4);
-            arrayUpdate(obiekt[3], obiekt[3][0]+1,obiekt[3][1]-1,4);
+            updatePosition(obiekt[0], 0, +2);
+            updatePosition(obiekt[1], +1, +1);
+            updatePosition(obiekt[2], +2, 0);
+            updatePosition(obiekt[3], +1, -1);
                     gen = 32;
                 }
         break;
         case 33://RL
-            arrayUpdate(obiekt[0], obiekt[0][0]+2,obiekt[0][1],4);
-            arrayUpdate(obiekt[1], obiekt[1][0]+1,obiekt[1][1]-1,4);
-            arrayUpdate(obiekt[2], obiekt[2][0],obiekt[2][1]-2,4);
-            arrayUpdate(obiekt[3], obiekt[3][0]-1,obiekt[3][1]-1,4);
+            updatePosition(obiekt[0], +2, 0);
+            updatePosition(obiekt[1], +1, -1);
+            updatePosition(obiekt[2], 0, -2);
+            updatePosition(obiekt[3], -1, -1);
             gen = 34;
                 if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
                 (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
                 (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
                 (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
                 {
-            arrayUpdate(obiekt[0], obiekt[0][0]-2,obiekt[0][1],4);
-            arrayUpdate(obiekt[1], obiekt[1][0]-1,obiekt[1][1]+1,4);
-            arrayUpdate(obiekt[2], obiekt[2][0],obiekt[2][1]+2,4);
-            arrayUpdate(obiekt[3], obiekt[3][0]+1,obiekt[3][1]+1,4);
+            updatePosition(obiekt[0], -2, 0);
+            updatePosition(obiekt[1], -1, +1);
+            updatePosition(obiekt[2], 0, +2);
+            updatePosition(obiekt[3], +1, +1);
             gen = 33;
                 }
         break;
         case 34://RL
-            arrayUpdate(obiekt[0], obiekt[0][0],obiekt[0][1]+2,4);
-            arrayUpdate(obiekt[1], obiekt[1][0]+1,obiekt[1][1]+1,4);
-            arrayUpdate(obiekt[2], obiekt[2][0]+2,obiekt[2][1],4);
-            arrayUpdate(obiekt[3], obiekt[3][0]+1,obiekt[3][1]-1,4);
+            updatePosition(obiekt[0], 0, +2);
+            updatePosition(obiekt[1], +1, +1);
+            updatePosition(obiekt[2], +2, 0);
+            updatePosition(obiekt[3], +1, -1);
             gen = 3;
                 if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
                 (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
                 (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
                 (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
                 {
-            arrayUpdate(obiekt[0], obiekt[0][0],obiekt[0][1]-2,4);
-            arrayUpdate(obiekt[1], obiekt[1][0]-1,obiekt[1][1]-1,4);
-            arrayUpdate(obiekt[2], obiekt[2][0]-2,obiekt[2][1],4);
-            arrayUpdate(obiekt[3], obiekt[3][0]-1,obiekt[3][1]+1,4);
+            updatePosition(obiekt[0], 0, -2);
+            updatePosition(obiekt[1], -1, -1);
+            updatePosition(obiekt[2], -2, 0);
+            updatePosition(obiekt[3], -1, +1);
             
             gen = 34;
                 }
         break;
         case 4://Z
-            arrayUpdate(obiekt[0], obiekt[0][0]+1,obiekt[0][1]-1,5);
-            arrayUpdate(obiekt[1], obiekt[1][0],obiekt[1][1],5);
-            arrayUpdate(obiekt[2], obiekt[2][0]+1,obiekt[2][1]+1,5);
-            arrayUpdate(obiekt[3], obiekt[3][0],obiekt[3][1]+2,5);
+            updatePosition(obiekt[0], +1, -1);
+            updatePosition(obiekt[1], 0, 0);
+            updatePosition(obiekt[2], +1, +1);
+            updatePosition(obiekt[3], 0, +2);
             gen = 41;
                 if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
                 (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
                 (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
                 (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
                 {
-            arrayUpdate(obiekt[0], obiekt[0][0]-1,obiekt[0][1]+1,5);
-            arrayUpdate(obiekt[1], obiekt[1][0],obiekt[1][1],5);
-            arrayUpdate(obiekt[2], obiekt[2][0]-1,obiekt[2][1]-1,5);
-            arrayUpdate(obiekt[3], obiekt[3][0],obiekt[3][1]-2,5);
+            updatePosition(obiekt[0], -1, +1);
+            updatePosition(obiekt[1], 0, 0);
+            updatePosition(obiekt[2], -1, -1);
+            updatePosition(obiekt[3], 0, -2);
             gen = 4;
                 }
         break;
         case 41://Z
-            arrayUpdate(obiekt[0], obiekt[0][0]-1,obiekt[0][1]+1,5);
-            arrayUpdate(obiekt[1], obiekt[1][0],obiekt[1][1],5);
-            arrayUpdate(obiekt[2], obiekt[2][0]-1,obiekt[2][1]-1,5);
-            arrayUpdate(obiekt[3], obiekt[3][0],obiekt[3][1]-2,5);
+            updatePosition(obiekt[0], -1, +1);
+            updatePosition(obiekt[1], 0, 0);
+            updatePosition(obiekt[2], -1, -1);
+            updatePosition(obiekt[3], 0, -2);
             gen = 4;
                 if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
                 (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
                 (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
                 (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
                 {
-            arrayUpdate(obiekt[0], obiekt[0][0]+1,obiekt[0][1]-1,5);
-            arrayUpdate(obiekt[1], obiekt[1][0],obiekt[1][1],5);
-            arrayUpdate(obiekt[2], obiekt[2][0]+1,obiekt[2][1]+1,5);
-            arrayUpdate(obiekt[3], obiekt[3][0],obiekt[3][1]+2,5);
+            updatePosition(obiekt[0], +1, -1);
+            updatePosition(obiekt[1], 0, 0);
+            updatePosition(obiekt[2], +1, +1);
+            updatePosition(obiekt[3], 0, +2);
             gen = 41;
                 }
         break;
         case 5://ReversZ
-            arrayUpdate(obiekt[0], obiekt[0][0]-1,obiekt[0][1]+1,6);
-            arrayUpdate(obiekt[1], obiekt[1][0],obiekt[1][1],6);
-            arrayUpdate(obiekt[2], obiekt[2][0]+1,obiekt[2][1]+1,6);
-            arrayUpdate(obiekt[3], obiekt[3][0]+2,obiekt[3][1],6);
+            updatePosition(obiekt[0], -1, +1);
+            updatePosition(obiekt[1], 0, 0);
+            updatePosition(obiekt[2], +1, +1);
+            updatePosition(obiekt[3], +2, 0);
             gen = 51;
                 if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
                 (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
                 (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
                 (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
                 {
-            arrayUpdate(obiekt[0], obiekt[0][0]+1,obiekt[0][1]-1,6);
-            arrayUpdate(obiekt[1], obiekt[1][0],obiekt[1][1],6);
-            arrayUpdate(obiekt[2], obiekt[2][0]-1,obiekt[2][1]-1,6);
-            arrayUpdate(obiekt[3], obiekt[3][0]-2,obiekt[3][1],6);
+            updatePosition(obiekt[0], +1, -1);
+            updatePosition(obiekt[1], 0, 0);
+            updatePosition(obiekt[2], -1, -1);
+            updatePosition(obiekt[3], -2, 0);
            gen = 5;
                 }
         break;
         case 51://ReversZ
-            arrayUpdate(obiekt[0], obiekt[0][0]+1,obiekt[0][1]-1,6);
-            arrayUpdate(obiekt[1], obiekt[1][0],obiekt[1][1],6);
-            arrayUpdate(obiekt[2], obiekt[2][0]-1,obiekt[2][1]-1,6);
-            arrayUpdate(obiekt[3], obiekt[3][0]-2,obiekt[3][1],6);
+            updatePosition(obiekt[0], +1, -1);
+            updatePosition(obiekt[1], 0, 0);
+            updatePosition(obiekt[2], -1, -1);
+            updatePosition(obiekt[3], -2, 0);
             gen = 5;
                 if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
                 (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
                 (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
                 (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
                 {
-            arrayUpdate(obiekt[0], obiekt[0][0]-1,obiekt[0][1]+1,6);
-            arrayUpdate(obiekt[1], obiekt[1][0],obiekt[1][1],6);
-            arrayUpdate(obiekt[2], obiekt[2][0]+1,obiekt[2][1]+1,6);
-            arrayUpdate(obiekt[3], obiekt[3][0]+2,obiekt[3][1],6);
+            updatePosition(obiekt[0], -1, +1);
+            updatePosition(obiekt[1], 0, 0);
+            updatePosition(obiekt[2], +1, +1);
+            updatePosition(obiekt[3], +2, 0);
            gen = 51;
                 }
         break;
         case 6://Nosek
-            arrayUpdate(obiekt[0], obiekt[0][0],obiekt[0][1]-2,7);
-            arrayUpdate(obiekt[1], obiekt[1][0]+1,obiekt[1][1]-1,7);
-            arrayUpdate(obiekt[2], obiekt[2][0]+2,obiekt[2][1],7);
-            arrayUpdate(obiekt[3], obiekt[3][0],obiekt[3][1],7);
+            updatePosition(obiekt[0], 0, -2);
+            updatePosition(obiekt[1], +1, -1);
+            updatePosition(obiekt[2], +2, 0);
+            updatePosition(obiekt[3], 0, 0);
             gen = 62;
                 if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
                 (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
                 (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
                 (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
                 {
-            arrayUpdate(obiekt[0], obiekt[0][0],obiekt[0][1]+2,7);
-            arrayUpdate(obiekt[1], obiekt[1][0]-1,obiekt[1][1]+1,7);
-            arrayUpdate(obiekt[2], obiekt[2][0]-2,obiekt[2][1],7);
-            arrayUpdate(obiekt[3], obiekt[3][0],obiekt[3][1],7);
+            updatePosition(obiekt[0], 0, +2);
+            updatePosition(obiekt[1], -1, +1);
+            updatePosition(obiekt[2], -2, 0);
+            updatePosition(obiekt[3], 0, 0);
                     gen = 6;
                 }
         break; 
         case 62://L
-            arrayUpdate(obiekt[0], obiekt[0][0]+2,obiekt[0][1],7);
-            arrayUpdate(obiekt[1], obiekt[1][0]+1,obiekt[1][1]+1,7);
-            arrayUpdate(obiekt[2], obiekt[2][0],obiekt[2][1]+2,7);
-            arrayUpdate(obiekt[3], obiekt[3][0],obiekt[3][1],7);
+            updatePosition(obiekt[0], +2, 0);
+            updatePosition(obiekt[1], +1, +1);
+            updatePosition(obiekt[2], 0, +2);
+            updatePosition(obiekt[3], 0, 0);
             gen = 63;
                 if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
                 (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
                 (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
                 (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
                 {
-                    arrayUpdate(obiekt[0], obiekt[0][0]-2,obiekt[0][1],7);
-                    arrayUpdate(obiekt[1], obiekt[1][0]-1,obiekt[1][1]-1,7);
-                    arrayUpdate(obiekt[2], obiekt[2][0],obiekt[2][1]-2,7);
-                    arrayUpdate(obiekt[3], obiekt[3][0],obiekt[3][1],7);
+                    updatePosition(obiekt[0], -2, 0);
+                    updatePosition(obiekt[1], -1, -1);
+                    updatePosition(obiekt[2], 0, -2);
+                    updatePosition(obiekt[3], 0, 0);
                     gen = 62;
                 }
         break;
         case 63://L
-            arrayUpdate(obiekt[0], obiekt[0][0],obiekt[0][1]+2,7);
-            arrayUpdate(obiekt[1], obiekt[1][0]-1,obiekt[1][1]+1,7);
-            arrayUpdate(obiekt[2], obiekt[2][0]-2,obiekt[2][1],7);
-            arrayUpdate(obiekt[3], obiekt[3][0],obiekt[3][1],7);
+            updatePosition(obiekt[0], 0, +2);
+            updatePosition(obiekt[1], -1, +1);
+            updatePosition(obiekt[2], -2, 0);
+            updatePosition(obiekt[3], 0, 0);
             gen = 64;
                 if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
                 (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
                 (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
                 (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
                 {
-            arrayUpdate(obiekt[0], obiekt[0][0],obiekt[0][1]-2,7);
-            arrayUpdate(obiekt[1], obiekt[1][0]+1,obiekt[1][1]-1,7);
-            arrayUpdate(obiekt[2], obiekt[2][0]+2,obiekt[2][1],7);
-            arrayUpdate(obiekt[3], obiekt[3][0],obiekt[3][1],7);
+            updatePosition(obiekt[0], 0, -2);
+            updatePosition(obiekt[1], +1, -1);
+            updatePosition(obiekt[2], +2, 0);
+            updatePosition(obiekt[3], 0, 0);
             gen = 63;
                 }
         break;
         case 64://L
-            arrayUpdate(obiekt[0], obiekt[0][0]-2,obiekt[0][1],7);
-            arrayUpdate(obiekt[1], obiekt[1][0]-1,obiekt[1][1]-1,7);
-            arrayUpdate(obiekt[2], obiekt[2][0],obiekt[2][1]-2,7);
-            arrayUpdate(obiekt[3], obiekt[3][0],obiekt[3][1],7);
+            updatePosition(obiekt[0], -2, 0);
+            updatePosition(obiekt[1], -1, -1);
+            updatePosition(obiekt[2], 0, -2);
+            updatePosition(obiekt[3], 0, 0);
             gen = 6;
                 if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
                 (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
                 (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
                 (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
                 {
-            arrayUpdate(obiekt[0], obiekt[0][0]+2,obiekt[0][1],7);
-            arrayUpdate(obiekt[1], obiekt[1][0]+1,obiekt[1][1]+1,7);
-            arrayUpdate(obiekt[2], obiekt[2][0],obiekt[2][1]+2,7);
-            arrayUpdate(obiekt[3], obiekt[3][0],obiekt[3][1],7);
+            updatePosition(obiekt[0], +2, 0);
+            updatePosition(obiekt[1], +1, +1);
+            updatePosition(obiekt[2], 0, +2);
+            updatePosition(obiekt[3], 0, 0);
             gen = 64;
                 }
         break;        
