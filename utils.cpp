@@ -1,5 +1,14 @@
 using namespace std;
 
+bool isCanNotDraw(int board[22][22], int figure[4][3]) {
+  return (
+    (board[figure[0][1]][figure[0][0]] != 0) ||
+    (board[figure[1][1]][figure[1][0]] != 0) ||
+    (board[figure[2][1]][figure[2][0]] != 0) ||
+    (board[figure[3][1]][figure[3][0]] != 0)
+  );
+}
+
 void setPosition(int point[3], int x, int y, int color) {
   point[0] = x;
   point[1] = y;

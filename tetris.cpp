@@ -273,10 +273,7 @@ void GenerujObjekt()
     gen = nastepny;
     drawFigure(obiekt, gen);
 
-    if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
-    (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
-    (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
-    (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
+    if(isCanNotDraw(plan, obiekt))
     {
         KoniecGry();
     }
@@ -295,10 +292,7 @@ void Obruc()
             updatePosition(obiekt[2], +1, 0);
             updatePosition(obiekt[3], +2, +1);
             gen = 11;
-                if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
-                (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
-                (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
-                (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
+                if(isCanNotDraw(plan, obiekt)) 
                 {
                     updatePosition(obiekt[0], +1, +2);
                     updatePosition(obiekt[1], 0, +1);
@@ -313,10 +307,7 @@ void Obruc()
             updatePosition(obiekt[2], -1, 0);
             updatePosition(obiekt[3], -2, -1);
             gen = 1;
-                if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
-                (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
-                (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
-                (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
+                if(isCanNotDraw(plan, obiekt))
                 {
                     updatePosition(obiekt[0], -1, -2);
                     updatePosition(obiekt[1], 0, -1);
@@ -331,10 +322,7 @@ void Obruc()
             updatePosition(obiekt[2], +2, 0);
             updatePosition(obiekt[3], +1, +1);
             gen = 22;
-                if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
-                (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
-                (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
-                (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
+                if(isCanNotDraw(plan, obiekt))
                 {
             updatePosition(obiekt[0], 0, +2);
             updatePosition(obiekt[1], -1, +1);
@@ -349,10 +337,7 @@ void Obruc()
             updatePosition(obiekt[2], 0, +2);
             updatePosition(obiekt[3], -1, +1);
             gen = 23;
-                if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
-                (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
-                (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
-                (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
+                if(isCanNotDraw(plan, obiekt))
                 {
                     updatePosition(obiekt[0], -2, 0);
                     updatePosition(obiekt[1], -1, -1);
@@ -367,10 +352,7 @@ void Obruc()
             updatePosition(obiekt[2], -2, 0);
             updatePosition(obiekt[3], -1, -1);
             gen = 24;
-                if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
-                (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
-                (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
-                (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
+                if(isCanNotDraw(plan, obiekt))
                 {
             updatePosition(obiekt[0], 0, -2);
             updatePosition(obiekt[1], +1, -1);
@@ -385,10 +367,7 @@ void Obruc()
             updatePosition(obiekt[2], 0, -2);
             updatePosition(obiekt[3], +1, -1);
             gen = 2;
-                if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
-                (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
-                (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
-                (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
+                if(isCanNotDraw(plan, obiekt))
                 {
             updatePosition(obiekt[0], +2, 0);
             updatePosition(obiekt[1], +1, +1);
@@ -403,10 +382,7 @@ void Obruc()
             updatePosition(obiekt[2], 0, +2);
             updatePosition(obiekt[3], +1, +1);
             gen = 32;
-                if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
-                (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
-                (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
-                (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
+                if(isCanNotDraw(plan, obiekt))
                 {
             updatePosition(obiekt[0], +2, 0);
             updatePosition(obiekt[1], +1, -1);
@@ -421,10 +397,7 @@ void Obruc()
             updatePosition(obiekt[2], -2, 0);
             updatePosition(obiekt[3], -1, +1);
             gen = 33;
-                if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
-                (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
-                (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
-                (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
+                if(isCanNotDraw(plan, obiekt))
                 {
             updatePosition(obiekt[0], 0, +2);
             updatePosition(obiekt[1], +1, +1);
@@ -439,10 +412,7 @@ void Obruc()
             updatePosition(obiekt[2], 0, -2);
             updatePosition(obiekt[3], -1, -1);
             gen = 34;
-                if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
-                (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
-                (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
-                (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
+                if(isCanNotDraw(plan, obiekt))
                 {
             updatePosition(obiekt[0], -2, 0);
             updatePosition(obiekt[1], -1, +1);
@@ -457,10 +427,7 @@ void Obruc()
             updatePosition(obiekt[2], +2, 0);
             updatePosition(obiekt[3], +1, -1);
             gen = 3;
-                if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
-                (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
-                (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
-                (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
+                if(isCanNotDraw(plan, obiekt))
                 {
             updatePosition(obiekt[0], 0, -2);
             updatePosition(obiekt[1], -1, -1);
@@ -476,10 +443,7 @@ void Obruc()
             updatePosition(obiekt[2], +1, +1);
             updatePosition(obiekt[3], 0, +2);
             gen = 41;
-                if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
-                (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
-                (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
-                (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
+                if(isCanNotDraw(plan, obiekt))
                 {
             updatePosition(obiekt[0], -1, +1);
             updatePosition(obiekt[1], 0, 0);
@@ -494,10 +458,7 @@ void Obruc()
             updatePosition(obiekt[2], -1, -1);
             updatePosition(obiekt[3], 0, -2);
             gen = 4;
-                if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
-                (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
-                (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
-                (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
+                if(isCanNotDraw(plan, obiekt))
                 {
             updatePosition(obiekt[0], +1, -1);
             updatePosition(obiekt[1], 0, 0);
@@ -512,10 +473,7 @@ void Obruc()
             updatePosition(obiekt[2], +1, +1);
             updatePosition(obiekt[3], +2, 0);
             gen = 51;
-                if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
-                (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
-                (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
-                (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
+                if(isCanNotDraw(plan, obiekt))
                 {
             updatePosition(obiekt[0], +1, -1);
             updatePosition(obiekt[1], 0, 0);
@@ -530,10 +488,7 @@ void Obruc()
             updatePosition(obiekt[2], -1, -1);
             updatePosition(obiekt[3], -2, 0);
             gen = 5;
-                if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
-                (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
-                (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
-                (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
+                if(isCanNotDraw(plan, obiekt))
                 {
             updatePosition(obiekt[0], -1, +1);
             updatePosition(obiekt[1], 0, 0);
@@ -548,10 +503,7 @@ void Obruc()
             updatePosition(obiekt[2], +2, 0);
             updatePosition(obiekt[3], 0, 0);
             gen = 62;
-                if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
-                (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
-                (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
-                (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
+                if(isCanNotDraw(plan, obiekt))
                 {
             updatePosition(obiekt[0], 0, +2);
             updatePosition(obiekt[1], -1, +1);
@@ -566,10 +518,7 @@ void Obruc()
             updatePosition(obiekt[2], 0, +2);
             updatePosition(obiekt[3], 0, 0);
             gen = 63;
-                if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
-                (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
-                (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
-                (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
+                if(isCanNotDraw(plan, obiekt))
                 {
                     updatePosition(obiekt[0], -2, 0);
                     updatePosition(obiekt[1], -1, -1);
@@ -584,10 +533,7 @@ void Obruc()
             updatePosition(obiekt[2], -2, 0);
             updatePosition(obiekt[3], 0, 0);
             gen = 64;
-                if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
-                (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
-                (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
-                (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
+                if(isCanNotDraw(plan, obiekt))
                 {
             updatePosition(obiekt[0], 0, -2);
             updatePosition(obiekt[1], +1, -1);
@@ -602,10 +548,7 @@ void Obruc()
             updatePosition(obiekt[2], 0, -2);
             updatePosition(obiekt[3], 0, 0);
             gen = 6;
-                if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
-                (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
-                (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
-                (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
+                if(isCanNotDraw(plan, obiekt))
                 {
             updatePosition(obiekt[0], +2, 0);
             updatePosition(obiekt[1], +1, +1);
@@ -626,10 +569,7 @@ void PrzesunObiekt()
     obiekt[2][1]--;
     obiekt[3][1]--;
    
-    if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
-       (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
-       (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
-       (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
+    if(isCanNotDraw(plan, obiekt))
       {
             obiekt[0][1]++; 
             obiekt[1][1]++;
@@ -652,10 +592,7 @@ void PrzesunLewo()
     obiekt[2][0]--;
     obiekt[3][0]--;
    
-    if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
-       (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
-       (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
-       (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
+    if(isCanNotDraw(plan, obiekt))
       {
             obiekt[0][0]++; 
             obiekt[1][0]++;
@@ -672,10 +609,7 @@ void PrzesunPrawo()
     obiekt[2][0]++;
     obiekt[3][0]++;
    
-    if((plan[obiekt[0][1]][obiekt[0][0]] != 0) ||
-       (plan[obiekt[1][1]][obiekt[1][0]] != 0) ||
-       (plan[obiekt[2][1]][obiekt[2][0]] != 0) ||
-       (plan[obiekt[3][1]][obiekt[3][0]] != 0)) 
+    if(isCanNotDraw(plan, obiekt))
       {
             obiekt[0][0]--; 
             obiekt[1][0]--;
