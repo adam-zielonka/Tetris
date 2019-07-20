@@ -3,12 +3,10 @@
 using namespace std;
 
 bool isCanNotDraw(int board[22][22], int figure[4][3]) {
-  return (
-    (board[figure[0][1]][figure[0][0]] != 0) ||
-    (board[figure[1][1]][figure[1][0]] != 0) ||
-    (board[figure[2][1]][figure[2][0]] != 0) ||
-    (board[figure[3][1]][figure[3][0]] != 0)
-  );
+  for (int i = 0; i < 4; i++) {
+    if((board[figure[i][1]][figure[i][0]] != 0)) return true;
+  }
+  return false;
 }
 
 void setPosition(int point[3], int x, int y, int color) {
@@ -121,4 +119,36 @@ bool moveFigureY(int board[22][22], int figure[4][3]) {
   } else {
     return false;
   }
+}
+
+bool isFullLine(int line[22]) {
+  for (int i = 1; i < 11; i++) {
+    if(line[i] == 0) return false;
+  }
+  return true;
+}
+
+int deleteLine(int board[22][22]) {
+  int points = 0;
+  bool foundLine;
+  do {
+    foundLine = false;
+    for(int j = 1; j < 21; j++) {
+      if(isFullLine(board[j])) {
+        for(int i = j; i < 20; i++) {
+          for(int n = 1; n < 11; n++) {
+            board[i][n] = board[i+1][n];
+          }
+        }
+        
+        for(int n = 1; n < 11; n++) {
+          board[20][n] = board[21][n];
+        }
+        foundLine = true;
+        points++;
+      }
+    }
+  } while(foundLine);
+
+  return points;
 }

@@ -305,44 +305,8 @@ void PrzesunPrawo()
 
 void KasujLinie()
 {
-    int dalej = 0;
-    do 
-    {
-    dalej = 0;
-    for(int j=1;j<21;j++)
-    {
-        if((plan[j][1] >= 1) &&
-           (plan[j][2] >= 1) &&
-           (plan[j][3] >= 1) &&
-           (plan[j][4] >= 1) &&
-           (plan[j][5] >= 1) &&
-           (plan[j][6] >= 1) &&
-           (plan[j][7] >= 1) &&
-           (plan[j][8] >= 1) &&
-           (plan[j][9] >= 1) &&
-           (plan[j][10] >= 1))
-           {
-                for(int i=j;i<20;i++)
-                {
-                    for(int n=1;n<11;n++)
-                    {
-                    plan[i][n]=plan[i+1][n];
-                    }
-                }
-                
-                    for(int n=1;n<11;n++)
-                    {
-                    plan[20][n]=plan[21][n];
-                    }
-               dalej = 1;
-               punkty++;
-           }
-           
-    }
-    } while(dalej == 1);
+    punkty += deleteLine(plan);
 }
-
-
 
 void Wypelni()
 {
