@@ -193,10 +193,7 @@ void GenerujObjekt()
     gen = nastepny;
     drawFigure(obiekt, gen);
 
-    if(isCanNotDraw(plan, obiekt))
-    {
-        KoniecGry();
-    }
+    if(isCanNotDraw(plan, obiekt)) KoniecGry();
 }
 
 void Obruc()
@@ -419,10 +416,8 @@ void Logo()
 
 void MenuG()
 {
-
-
-glColor3f(0, 0, 0);
-char string[64];
+    glColor3f(0, 0, 0);
+    char string[64];
 
     sprintf(string, "Nowa Gra");
     printtext(250,281,string);
@@ -438,14 +433,13 @@ char string[64];
     
     sprintf(string, "Wyjscie");
     printtext(250,55,string);
-    
 }
 
 
 void GameTekst()
 {
-glColor3f(0, 0, 0);
-char string[64];
+    glColor3f(0, 0, 0);
+    char string[64];
 
     sprintf(string, "Punkty");
     printtext(390,540,string);
@@ -456,32 +450,29 @@ char string[64];
     printtext(370,483,wynikiimie[1]);
     printtext(490,483,wynikippp[1]);
     
-    if(menu ==10)
-    {
-    sprintf(string, "Podaj imie i koncz [ESC]");
-    printtext(332,426,string);
+    if(menu == 10) {
+        sprintf(string, "Podaj imie i koncz [ESC]");
+        printtext(332,426,string);
     }
     
-    if(menu ==11)
-    {
-    sprintf(string, "Przegrales i koncz [ESC]");
-    printtext(332,426,string);
+    if(menu == 11) {
+        sprintf(string, "Przegrales i koncz [ESC]");
+        printtext(332,426,string);
     }
-   
 }
 
 void Pauza()
 {
-glColor3f(0, 0, 0);
-char string[64];
+    glColor3f(0, 0, 0);
+    char string[64];
     sprintf(string, "Pauza! Kliknij [P] i graj");
     printtext(332,426,string);
 }
 
 void PomocTekst()
 {
-glColor3f(0, 0, 0);
-char string[64];
+    glColor3f(0, 0, 0);
+    char string[64];
 
     sprintf(string, "Sterowanie:");
     printtext(90,280,string);
@@ -496,7 +487,6 @@ char string[64];
     sprintf(string, "W lewo");
     printtext(80,157,string);
     
-    
     sprintf(string, "Inne:");
     printtext(250,256,string);
     sprintf(string, "[ESC] Wyjscie/Powrot");
@@ -507,15 +497,12 @@ char string[64];
     printtext(250,183,string);
     sprintf(string, "[P] Pauza");
     printtext(250,157,string);
-
-
 }
-
 
 void UstawieniaTekst()
 {
-glColor3f(0, 0, 0);
-char string[64];
+    glColor3f(0, 0, 0);
+    char string[64];
 
     sprintf(string, "Ustawienia:");
     printtext(90,280,string);
@@ -530,7 +517,6 @@ char string[64];
     sprintf(string, " ");
     printtext(80,157,string);
     
-    
     sprintf(string,"%i" ,speed);
     printtext(250,256,string);
     sprintf(string, " ");
@@ -541,47 +527,28 @@ char string[64];
     printtext(250,183,string);
     sprintf(string, " ");
     printtext(250,157,string);
-
-
 }
 
 void NowaGra()
 {
-     for(int i=1;i<21;i++)
-     {
-        plan[i][1] = 0;
-        plan[i][2] = 0;
-        plan[i][3] = 0;
-        plan[i][4] = 0;
-        plan[i][5] = 0;
-        plan[i][6] = 0;
-        plan[i][7] = 0;
-        plan[i][8] = 0;
-        plan[i][9] = 0;
-        plan[i][10] = 0;
-    }
-    punkty =0;
+    clearBoard(plan);
+    punkty = 0;
     GenerujNext();
     GenerujObjekt();   
     GenerujNext(); 
 }
 
-
-
-
-
 void NajWyniki()
 {
-glColor3f(0, 0, 0);
+    glColor3f(0, 0, 0);
 
     int nop = 0;
     int liczba = 0;
-        while(++liczba<6)
-        {
-           printtext(220,281-nop,wynikiimie[liczba]);
-           printtext(340,281-nop,wynikippp[liczba]);
-           nop+=57;
-        }
+    while(++liczba < 6) {
+        printtext(220,281-nop,wynikiimie[liczba]);
+        printtext(340,281-nop,wynikippp[liczba]);
+        nop+=57;
+    }
 }
 
 void Zapisz()
@@ -601,59 +568,52 @@ void Display()
  
 	glEnable(GL_DEPTH_TEST);
 
-    
-    
-    
-    if (menu == 1){
-    KasujLinie();
-    Wypelni();
-    GameTekst();
+    if (menu == 1) {
+        KasujLinie();
+        Wypelni();
+        GameTekst();
     }
     
-    if (menu == 0){
-    Logo();
-    MenuG();
+    if (menu == 0) {
+        Logo();
+        MenuG();
     }
     
     //Pomoc
-    if (menu == 2){
-    Pomoc();
-    PomocTekst();
+    if (menu == 2) {
+        Pomoc();
+        PomocTekst();
     }
     //Ustawieni    
-    if (menu == 3){
-    Pomoc();
-    UstawieniaTekst();
+    if (menu == 3) {
+        Pomoc();
+        UstawieniaTekst();
     }
     
     //Wyniki
-    if (menu == 4){
-    Logo();
-    NajWyniki();
+    if (menu == 4) {
+        Logo();
+        NajWyniki();
     }
-    
     
     //KoniecGry
-    if (menu == 10)
-    {
-    Wypelni();
-    GameTekst();
-    Zapisz();
+    if (menu == 10) {
+        Wypelni();
+        GameTekst();
+        Zapisz();
     }
     
-    if (menu == 11)
-    {
-    Wypelni();
-    GameTekst();
-    }
-        if (menu == 22)
-    {
-    Wypelni();
-    GameTekst();
-    Pauza();
+    if (menu == 11) {
+        Wypelni();
+        GameTekst();
     }
 
-    
+    if (menu == 22) {
+        Wypelni();
+        GameTekst();
+        Pauza();
+    }
+
     // skierowanie polece� do wykonania
     glFlush();    
     // zamiana bufor�w koloru
@@ -661,8 +621,9 @@ void Display()
 }
 
 void Timer( int value )
-{   if (menu == 1){
-    PrzesunObiekt();  
+{   
+    if (menu == 1) {
+        PrzesunObiekt();  
     } 
     // wy�wietlenie sceny
     Display();    
@@ -673,7 +634,7 @@ void Timer( int value )
 void Reshape(int width, int height)
 { 
     glViewport( 0, 0, width, height );
-    	glMatrixMode(GL_PROJECTION);
+    glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(70, 1, 1, 100);
  
@@ -688,89 +649,71 @@ void Keyboard( unsigned char key, int x, int y )
 {   
     OdczytZPlku();
 
-  if((key == 'P' || key == 'p') && menu == 1)
-    {
+    if((key == 'P' || key == 'p') && menu == 1) {
         menu = 22;
         key=0;
-  }
-  if((key == 'P' || key == 'p') && menu == 22)
-    {
+    }
+
+    if((key == 'P' || key == 'p') && menu == 22) {
         menu = 1;
-  }
+    }
   
-  
-  if(key == '+' && speed<2000)
-  {
+    if(key == '+' && speed<2000) {
         speed+=100;
-  }
-  if(key == '-' && speed>0)
-  {
+    }
+
+    if(key == '-' && speed>0) {
         speed-=100;
-  }
-  
+    }  
 
-    if(key == ' ' && menu == 0)
-    {
-    
-         switch(menuwyb)      
-    {  
-        case 0:
-        menu = 1;
-        NowaGra();
-        break; 
-        
-        case 1:
-        menu = 2;
-        break; 
-        
-        case 2:
-        menu = 3;
-        break; 
-        
-        //Wyniki
-        case 3:
-        menu = 4;
-        
-        break; 
-        
-        case 4:
-        exit(0);
-        break;
-
-    };
+    if(key == ' ' && menu == 0) {
+        switch(menuwyb) {  
+            case 0:
+                menu = 1;
+                NowaGra();
+                break; 
+            case 1:
+                menu = 2;
+                break; 
+            case 2:
+                menu = 3;
+                break; 
+            //Wyniki
+            case 3:
+                menu = 4;
+                break; 
+            case 4:
+                exit(0);
+                break;
+        };
     }
     
-    if(wpisywanie == 1 && ((key >= 48 && key <= 57) || (key >= 65 && key <= 90) || (key >= 97 && key <=122)) && imieznkow <=10 )
-    {
+    if(wpisywanie == 1 
+        && ((key >= 48 && key <= 57) || (key >= 65 && key <= 90) || (key >= 97 && key <=122)) 
+        && imieznkow <=10 ) {
+
         imie[imieznkow] = key;
         imieznkow++;
-        
     }
     
-    if(wpisywanie == 1 && key == 8 && imieznkow > 0)
-    {
+    if(wpisywanie == 1 && key == 8 && imieznkow > 0) {
         imieznkow--;
         imie[imieznkow] = 0;
     }
     
-    
-    if(key == 27 && wpisywanie == 1)
-    {
-        menu=0;
-        wpisywanie=0;
-        key =0;
+    if(key == 27 && wpisywanie == 1) {
+        menu = 0;
+        wpisywanie = 0;
+        key = 0;
         ZapiszDoPliku();
     }
-    else if(key == 27 && menu == 11)
-    {
-        menu=4;
+    else if(key == 27 && menu == 11) {
+        menu = 4;
     }
-    else if(key == 27 && menu == 0)//ESC
-    {
+    else if(key == 27 && menu == 0) {
         exit( 0 );
     }
-    else if(key == 27)
-    {
+    else if(key == 27) {
         menu = 0;
     }
     
@@ -778,65 +721,56 @@ void Keyboard( unsigned char key, int x, int y )
 }
 void Znaki_Spec(int key, int x, int y)
 { 
-
-    if(key == GLUT_KEY_F1 && menu==1)
-    {
-        menu =2;
-        key =0;
+    if(key == GLUT_KEY_F1 && menu == 1) {
+        menu = 2;
+        key = 0;
     }
     
-    if(key == GLUT_KEY_F1 && menu==2)
-    {
-        menu =1;
-        key =0;
+    if(key == GLUT_KEY_F1 && menu == 2) {
+        menu = 1;
+        key = 0;
     }
-    
 
-
-    if (menu == 1)
-    {
-    switch(key)      
-    {  
-        case GLUT_KEY_UP:
-        Obruc();
-        break; 
-        case GLUT_KEY_DOWN:
-        PrzesunObiekt();
-        break;  
-        case GLUT_KEY_LEFT:
-        PrzesunLewo();
-        break; 
-        case GLUT_KEY_RIGHT:
-        PrzesunPrawo();
-        break; 
-        case GLUT_KEY_END:
-            menu = 0;
-            key=0;      
-        break; 
+    if (menu == 1) {
+        switch(key) {  
+            case GLUT_KEY_UP:
+                Obruc();
+                break; 
+            case GLUT_KEY_DOWN:
+                PrzesunObiekt();
+                break;  
+            case GLUT_KEY_LEFT:
+                PrzesunLewo();
+                break; 
+            case GLUT_KEY_RIGHT:
+                PrzesunPrawo();
+                break; 
+            case GLUT_KEY_END:
+                menu = 0;
+                key = 0;      
+                break; 
+        }
     }
-    }
-    if (menu == 0)
-    {
-    switch(key)      
-    {  
-        case GLUT_KEY_DOWN:
-        if(menuwyb == 4) menuwyb = 0;
-        else menuwyb++;
-        break; 
-        case GLUT_KEY_UP:
-        if(menuwyb == 0) menuwyb = 4;
-        else menuwyb--;
-        break;  
-        case GLUT_KEY_LEFT:
+    if (menu == 0) {
+        switch(key) {  
+            case GLUT_KEY_DOWN:
+            if(menuwyb == 4) menuwyb = 0;
+            else menuwyb++;
+            break; 
+            case GLUT_KEY_UP:
+            if(menuwyb == 0) menuwyb = 4;
+            else menuwyb--;
+            break;  
+            case GLUT_KEY_LEFT:
 
-        break; 
-        case GLUT_KEY_RIGHT:
+            break; 
+            case GLUT_KEY_RIGHT:
 
-        break; 
-        case GLUT_KEY_END:
-            exit( 0 );        
-        break; 
-    }
+            break; 
+            case GLUT_KEY_END:
+                exit( 0 );        
+            break; 
+        }
     }
     
     //narysowanie sceny

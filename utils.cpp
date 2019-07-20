@@ -152,3 +152,10 @@ int deleteLine(int board[22][22]) {
 
   return points;
 }
+
+void clearBoard(int board[22][22]) {
+  for(int i = 1; i < 21; i++) {
+    for(int j = 1; j < 11; j++)
+      board[i][j] = 0;
+  }
+}
