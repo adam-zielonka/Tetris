@@ -11,8 +11,8 @@
 #include <iostream>
 #include <ctime>
 #include <cstring>
-#include <fstream>
 #include "utils.cpp"
+#include "file.cpp"
 
 using namespace std;
  
@@ -147,101 +147,21 @@ int pop[20][20] =
 
 void OdczytZPlku()
 {
-
- fstream plik;
-    plik.open( "wyniki.txt", ios::in );
-    if( plik.good() )
-    {
-        string napis;
-       int liczba = 0;
-        while( !plik.eof() && ++liczba<6)
-        {
-            getline( plik, napis );
-               for(int i=0;i<11;i++)
-               {
-               wynikiimie[liczba][i]=napis[i];
-               }
-               wynikiimie[liczba][11]=0;
-                 if( wynikiimie[liczba][0]==0)
-                 {
-                    sprintf(wynikiimie[liczba], "Anonim");
-                 }
-               wynikipunkty[liczba]=0;
-                getline( plik, napis );
-                 for(int i=0;i<11;i++)
-               {
-               
-               wynikippp[liczba][i]=napis[i];
-               if (napis[i]==0) break;
-                wynikipunkty[liczba]+=napis[i]-48;
-                wynikipunkty[liczba]*=10;
-               }
-               wynikipunkty[liczba]/=10;
-        }
-        plik.close();
-    }else
-    {
-    fstream plik;
-    plik.open( "wyniki.txt", ios::out );
-    if( plik.good() )
-    {
-       int liczba = 0;
-        while(++liczba<6)
-        {
-               plik<<wynikiimie[liczba]<<endl;
-               plik<<wynikipunkty[liczba]<<endl;
-        }
-        plik.close();
-    } 
-     OdczytZPlku();
-    
-    } 
+    readResultsFile(wynikiimie, wynikipunkty, wynikippp);
 }
 
 void ZapiszDoPliku()
 {
-
-
-
-fstream plik;
-    plik.open( "wyniki.txt", ios::out );
-    if( plik.good() )
-    {
-       int wp=0;
-       int liczba = 0;
-        while(++liczba<5)
-        {
-               if(wynikipunkty[liczba]<punkty && wp == 0)
-               {
-               liczba--;
-               plik<<imie<<endl;
-               plik<<punkty<<endl;
-               wp=1;
-               }
-               else{
-               plik<<wynikiimie[liczba]<<endl;
-               plik<<wynikipunkty[liczba]<<endl;
-               }
-        }
-        plik.close();
-    } 
-     OdczytZPlku();
-     menu=4;
+    saveResultFile(wynikiimie, wynikipunkty, imie, punkty);
+    OdczytZPlku();
+    menu=4;
 }
 
 void KoniecGry()
 {
-    if(punkty>wynikipunkty[5])
-       {
-       menu=10;
-       }
-      else
-      {
-      menu=11;
-      }
-
+    if(punkty>wynikipunkty[5]) menu=10;
+    else menu=11;
 }
-
 
 //objektu
 int obiekt[4][3]=
