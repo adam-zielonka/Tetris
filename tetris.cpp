@@ -264,7 +264,7 @@ void Timer(int value) {
   // wy�wietlenie sceny
   Display();    
   // nast�pne wywo�anie funkcji timera
-  glutTimerFunc( speed, Timer, 0 );
+  glutTimerFunc(speed, Timer, 0);
 }
 
 void Reshape(int width, int height)
@@ -423,7 +423,7 @@ int main(int argc, char * argv[]) {
   
   glutKeyboardFunc(Keyboard);
   glutSpecialFunc(Znaki_Spec);    
-  glutTimerFunc( speed, Timer, 0 );
+  glutTimerFunc(speed, Timer, 0);
   glutMainLoop();
   return 0;
 }
