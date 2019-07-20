@@ -14,6 +14,7 @@
 #include "utils.cpp"
 #include "file.cpp"
 #include "texts.cpp"
+#include "board.cpp"
 
 using namespace std;
  
@@ -28,19 +29,6 @@ int imieznkow =0;
 int wynikipunkty[6] = {0,0,0,0,0,0};
 char wynikiimie[6][64];
 char wynikippp[6][64];
-
-const GLfloat Kolory[8][3] =
-{
-    {1,1,1},
-    {0,1,1},//Kwadrad - Turkus
-    {1,0,0},//Linika  - Czerwony
-    {1,1,0},//L       - Zloty
-    {1,0,1},//ReversL - Fiolet
-    {0,1,0},//Z       - Niebieski
-    {0,0,1},//ReversZ - Zielony
-    {0.5,0.5,0.5} //Nosek   - Szary
-    
-};
 
 //Tablica planszy
 int plan[22][22] = 
@@ -198,191 +186,20 @@ void KasujLinie()
     punkty += deleteLine(plan);
 }
 
-void Wypelni()
+void Wypelni() 
 {
-    //szachownica
-    GLfloat Syh=-1.0,Syl=-0.9,Sxl=-1.0,Sxh=-0.9;
-
-    for(int j=1;j<21;j++)
-    {
-    Sxl=-1.0;
-    Sxh=-0.9;
-    
-    for(int i=1;i<21;i++)
-    {
-    if((i+j)%2==0)
-        glColor3f(0, 0.1, 0); 
-    else
-        glColor3f(0, 0, 0.1); 
-        
-      
-        
-    if(plan[j][i] != 0)
-    {
-        glColor3fv(Kolory[plan[j][i]]);
-    }
-    
-    if((i+j)%2==0 && i>10)
-        glColor3f(0.1, 0.1, 0); 
-    else if((i+j)%2!=0 && i>10)
-        glColor3f(0.1, 0, 0.1);
-    
-    if(plan[j][i] != 0 && i>11)
-    {
-        glColor3fv(Kolory[plan[j][i]]);
-    }
-    
-    if(j == obiekt[0][1] && i == obiekt[0][0])
-        glColor3fv(Kolory[obiekt[0][2]]);
-    if(j == obiekt[1][1] && i == obiekt[1][0])
-        glColor3fv(Kolory[obiekt[1][2]]);
-    if(j == obiekt[2][1] && i == obiekt[2][0])
-        glColor3fv(Kolory[obiekt[2][2]]);
-    if(j == obiekt[3][1] && i == obiekt[3][0])
-        glColor3fv(Kolory[obiekt[3][2]]);
-
-    if(j == obiekt2[0][1] && i == obiekt2[0][0])
-        glColor3fv(Kolory[obiekt2[0][2]]);
-    if(j == obiekt2[1][1] && i == obiekt2[1][0])
-        glColor3fv(Kolory[obiekt2[1][2]]);
-    if(j == obiekt2[2][1] && i == obiekt2[2][0])
-        glColor3fv(Kolory[obiekt2[2][2]]);
-    if(j == obiekt2[3][1] && i == obiekt2[3][0])
-        glColor3fv(Kolory[obiekt2[3][2]]);
-
-   if( (wpisywanie == 1 || menu ==11 || menu==22)&& j == 15 && i >11 &&  i<20)
-    glColor3fv(Kolory[6]);
-    
-       if( wpisywanie == 1 && j == 13 && i >12 &&  i<19)
-    glColor3fv(Kolory[1]);
-        
-     glBegin( GL_QUADS );
-       glVertex3f( Sxl , Syl, 0);
-       glVertex3f( Sxh , Syl , 0);
-       glVertex3f( Sxh , Syh , 0); 
-       glVertex3f( Sxl , Syh , 0); 
-     glEnd();
-     
-     Sxl+=0.1;
-     Sxh+=0.1;
-     
-     }
-     Syl+=0.1;
-     Syh+=0.1;
-     }
-
+    drawBoard(plan, obiekt, obiekt2, menu, wpisywanie);
 }
 
 
 void Pomoc()
 {
-  GLfloat Syh=-1.0,Syl=-0.9,Sxl=-1.0,Sxh=-0.9;
-
-    for(int j=0;j<20;j++)
-    {
-    Sxl=-1.0;
-    Sxh=-0.9;
-    
-    
-    
-    for(int i=0;i<20;i++)
-    {
-    if((i+j)%2==0)
-        glColor3f(0, 0.1, 0); 
-    else
-        glColor3f(0, 0, 0.1); 
-        
-    if(pop[j][i] != 0)
-    {
-        glColor3fv(Kolory[pop[j][i]]);
-    }    
-
-     if((pop[j][i]==7 && menuwyb == 0 && j==9) ||
-        (pop[j][i]==7 && menuwyb == 1 && j==7) ||
-        (pop[j][i]==7 && menuwyb == 2 && j==5) ||
-        (pop[j][i]==7 && menuwyb == 3 && j==3) ||
-        (pop[j][i]==7 && menuwyb == 4 && j==1))
-        glColor3fv(Kolory[0]);
-        
-        if((pop[j][i]==7 && menu == 4 && j==9) ||
-        (pop[j][i]==7 && menu == 4 && j==7) ||
-        (pop[j][i]==7 && menu == 4 && j==5) ||
-        (pop[j][i]==7 && menu == 4 && j==3) ||
-        (pop[j][i]==7 && menu == 4 && j==1))
-        glColor3fv(Kolory[3]);
-        
-        
-     glBegin( GL_QUADS );
-       glVertex3f( Sxl , Syl, 0);
-       glVertex3f( Sxh , Syl , 0);
-       glVertex3f( Sxh , Syh , 0); 
-       glVertex3f( Sxl , Syh , 0); 
-     glEnd();
-     
-     Sxl+=0.1;
-     Sxh+=0.1;
-     
-     }
-     Syl+=0.1;
-     Syh+=0.1;
-     }
-
+    drawBoard(pop, menu, menuwyb);
 }
 
 void Logo()
 {    
-
-    GLfloat Syh=-1.0,Syl=-0.9,Sxl=-1.0,Sxh=-0.9;
-
-    for(int j=0;j<20;j++)
-    {
-    Sxl=-1.0;
-    Sxh=-0.9;
-    
-    
-    
-    for(int i=0;i<20;i++)
-    {
-    if((i+j)%2==0)
-        glColor3f(0, 0.1, 0); 
-    else
-        glColor3f(0, 0, 0.1); 
-        
-    if(logo[j][i] != 0)
-    {
-        glColor3fv(Kolory[logo[j][i]]);
-    }    
-
-     if((logo[j][i]==7 && menuwyb == 0 && j==9) ||
-        (logo[j][i]==7 && menuwyb == 1 && j==7) ||
-        (logo[j][i]==7 && menuwyb == 2 && j==5) ||
-        (logo[j][i]==7 && menuwyb == 3 && j==3) ||
-        (logo[j][i]==7 && menuwyb == 4 && j==1))
-        glColor3fv(Kolory[0]);
-        
-        if((logo[j][i]==7 && menu == 4 && j==9) ||
-        (logo[j][i]==7 && menu == 4 && j==7) ||
-        (logo[j][i]==7 && menu == 4 && j==5) ||
-        (logo[j][i]==7 && menu == 4 && j==3) ||
-        (logo[j][i]==7 && menu == 4 && j==1))
-        glColor3fv(Kolory[3]);
-        
-        
-     glBegin( GL_QUADS );
-       glVertex3f( Sxl , Syl, 0);
-       glVertex3f( Sxh , Syl , 0);
-       glVertex3f( Sxh , Syh , 0); 
-       glVertex3f( Sxl , Syh , 0); 
-     glEnd();
-     
-     Sxl+=0.1;
-     Sxh+=0.1;
-     
-     }
-     Syl+=0.1;
-     Syh+=0.1;
-     }
-
+    drawBoard(logo, menu, menuwyb);
 }
 
 void GameTekst()
