@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void drawText(string String, int x, int y) {
+void renderText(string String, int x, int y) {
   glColor3f(0, 0, 0);
   glMatrixMode(GL_PROJECTION);
   glPushMatrix();
@@ -26,8 +26,8 @@ void drawText(string String, int x, int y) {
   glPopMatrix();
 }
 
-void drawText(int number, int x, int y) {
+void renderText(int number, int x, int y) {
   char string[64];
   sprintf(string, "%i", number);
-  drawText(string, x, y);
+  renderText(string, x, y);
 }
