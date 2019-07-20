@@ -77,14 +77,14 @@ void drawBoard(int board[22][22], int figure[4][3], int nextFigure[4][3], int me
 
 void drawBoard(int board[20][20], int menu, int selectedItem)
 {
-  GLfloat Syh=-1.0, Syl=-0.9, Sxl=-1.0, Sxh=-0.9;
+  GLfloat Syh = -1.0, Syl = -0.9, Sxl = -1.0, Sxh = -0.9;
 
   for(int j=0;j<20;j++) {
-    Sxl=-1.0;
-    Sxh=-0.9;
+    Sxl = -1.0;
+    Sxh = -0.9;
     
     for(int i=0;i<20;i++) {
-      if((i+j)%2==0)
+      if((i + j) % 2 == 0)
         glColor3f(0, 0.1, 0); 
       else
         glColor3f(0, 0, 0.1); 
@@ -105,6 +105,38 @@ void drawBoard(int board[20][20], int menu, int selectedItem)
         (board[j][i]==7 && menu == 4 && j==3) ||
         (board[j][i]==7 && menu == 4 && j==1))
         glColor3fv(Colors[3]);
+        
+      glBegin( GL_QUADS );
+        glVertex3f(Sxl, Syl, 0);
+        glVertex3f(Sxh, Syl, 0);
+        glVertex3f(Sxh, Syh, 0); 
+        glVertex3f(Sxl, Syh, 0); 
+      glEnd();
+      
+      Sxl+=0.1;
+      Sxh+=0.1;
+    }
+    Syl+=0.1;
+    Syh+=0.1;
+  }
+}
+
+void drawBoard(int board[20][20])
+{
+  GLfloat Syh = -1.0, Syl = -0.9, Sxl = -1.0, Sxh = -0.9;
+
+  for(int j=0;j<20;j++) {
+    Sxl = -1.0;
+    Sxh = -0.9;
+    
+    for(int i=0;i<20;i++) {
+      if((i + j) % 2 == 0)
+        glColor3f(0, 0.1, 0); 
+      else
+        glColor3f(0, 0, 0.1); 
+          
+      if(board[j][i] != 0)
+        glColor3fv(Colors[board[j][i]]);
         
       glBegin( GL_QUADS );
         glVertex3f(Sxl, Syl, 0);
