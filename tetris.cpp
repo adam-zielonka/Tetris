@@ -13,36 +13,10 @@
 #include <cstring>
 #include "utils.cpp"
 #include "file.cpp"
+#include "texts.cpp"
 
 using namespace std;
  
-void printtext(int x, int y, string String)
-{
-//(x,y) is from the bottom left of the window
-    glMatrixMode(GL_PROJECTION);
-    glPushMatrix();
-    glLoadIdentity();
-    glOrtho(0, 600, 0, 600, -1.0f, 1.0f);
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glLoadIdentity();
-    glPushAttrib(GL_DEPTH_TEST);
-    glDisable(GL_DEPTH_TEST);
-    glRasterPos2i(x,y);
-    for (unsigned int i=0; i<String.size(); i++)
-    {
-        glutBitmapCharacter(GLUT_BITMAP_9_BY_15, String[i]);
-    }
-    glPopAttrib();
-    glMatrixMode(GL_PROJECTION);
-    glPopMatrix();
-    glMatrixMode(GL_MODELVIEW);
-    glPopMatrix();
-}
-
-
-
-
 //Szybkos� spadania
 GLint speed= 1000;
 int menu = 0;
@@ -54,7 +28,6 @@ int imieznkow =0;
 int wynikipunkty[6] = {0,0,0,0,0,0};
 char wynikiimie[6][64];
 char wynikippp[6][64];
-
 
 const GLfloat Kolory[8][3] =
 {
@@ -412,121 +385,9 @@ void Logo()
 
 }
 
-
-
-void MenuG()
-{
-    glColor3f(0, 0, 0);
-    char string[64];
-
-    sprintf(string, "Nowa Gra");
-    printtext(250,281,string);
-
-    sprintf(string, "Pomoc");
-    printtext(250,225,string);
-    
-    sprintf(string, "Ustawienia");
-    printtext(250,168,string);
-    
-    sprintf(string, "Wyniki");
-    printtext(250,111,string);
-    
-    sprintf(string, "Wyjscie");
-    printtext(250,55,string);
-}
-
-
 void GameTekst()
 {
-    glColor3f(0, 0, 0);
-    char string[64];
-
-    sprintf(string, "Punkty");
-    printtext(390,540,string);
-
-    sprintf(string, "%i",punkty);
-    printtext(460,540,string);
-    
-    printtext(370,483,wynikiimie[1]);
-    printtext(490,483,wynikippp[1]);
-    
-    if(menu == 10) {
-        sprintf(string, "Podaj imie i koncz [ESC]");
-        printtext(332,426,string);
-    }
-    
-    if(menu == 11) {
-        sprintf(string, "Przegrales i koncz [ESC]");
-        printtext(332,426,string);
-    }
-}
-
-void Pauza()
-{
-    glColor3f(0, 0, 0);
-    char string[64];
-    sprintf(string, "Pauza! Kliknij [P] i graj");
-    printtext(332,426,string);
-}
-
-void PomocTekst()
-{
-    glColor3f(0, 0, 0);
-    char string[64];
-
-    sprintf(string, "Sterowanie:");
-    printtext(90,280,string);
-    sprintf(string, "Strzalki:");
-    printtext(80,256,string);
-    sprintf(string, "W gore - obrot");
-    printtext(80,232,string);
-    sprintf(string, "W dol - opadanie");
-    printtext(80,209,string);
-    sprintf(string, "W prawo");
-    printtext(80,183,string);
-    sprintf(string, "W lewo");
-    printtext(80,157,string);
-    
-    sprintf(string, "Inne:");
-    printtext(250,256,string);
-    sprintf(string, "[ESC] Wyjscie/Powrot");
-    printtext(250,232,string);
-    sprintf(string, "[SPACJA] Wybor z Menu");
-    printtext(250,209,string);
-    sprintf(string, "[F1] Pomoc");
-    printtext(250,183,string);
-    sprintf(string, "[P] Pauza");
-    printtext(250,157,string);
-}
-
-void UstawieniaTekst()
-{
-    glColor3f(0, 0, 0);
-    char string[64];
-
-    sprintf(string, "Ustawienia:");
-    printtext(90,280,string);
-    sprintf(string, "Pretkosc [+][-]");
-    printtext(80,256,string);
-    sprintf(string, " ");
-    printtext(80,232,string);
-    sprintf(string, " ");
-    printtext(80,209,string);
-    sprintf(string, " ");
-    printtext(80,183,string);
-    sprintf(string, " ");
-    printtext(80,157,string);
-    
-    sprintf(string,"%i" ,speed);
-    printtext(250,256,string);
-    sprintf(string, " ");
-    printtext(250,232,string);
-    sprintf(string, " ");
-    printtext(250,209,string);
-    sprintf(string, " ");
-    printtext(250,183,string);
-    sprintf(string, " ");
-    printtext(250,157,string);
+    GameTexts(menu, wynikiimie[1], wynikippp[1], punkty);
 }
 
 void NowaGra()
@@ -538,25 +399,9 @@ void NowaGra()
     GenerujNext(); 
 }
 
-void NajWyniki()
-{
-    glColor3f(0, 0, 0);
-
-    int nop = 0;
-    int liczba = 0;
-    while(++liczba < 6) {
-        printtext(220,281-nop,wynikiimie[liczba]);
-        printtext(340,281-nop,wynikippp[liczba]);
-        nop+=57;
-    }
-}
-
-void Zapisz()
-{
+void Zapisz() {
     wpisywanie = 1;
-    char string[64];
-    sprintf(string, imie);
-    printtext(390,369,string);
+    SaveTexts(imie);
 }
 
 // funkcja generuj�ca scen� 3D
@@ -576,24 +421,24 @@ void Display()
     
     if (menu == 0) {
         Logo();
-        MenuG();
+        MainMenuTexts();
     }
     
     //Pomoc
     if (menu == 2) {
         Pomoc();
-        PomocTekst();
+        HelpTexts();
     }
     //Ustawieni    
     if (menu == 3) {
         Pomoc();
-        UstawieniaTekst();
+        SettingsTexts(speed);
     }
     
     //Wyniki
     if (menu == 4) {
         Logo();
-        NajWyniki();
+        BestResultsTexts(wynikiimie, wynikippp);
     }
     
     //KoniecGry
@@ -611,7 +456,7 @@ void Display()
     if (menu == 22) {
         Wypelni();
         GameTekst();
-        Pauza();
+        PauseTexts();
     }
 
     // skierowanie polece� do wykonania
@@ -785,7 +630,7 @@ int main( int argc, char * argv[] )
     glutInit(& argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(600, 600);
-    glutCreateWindow("Tetris - Zielonka Adam");
+    glutCreateWindow("Tetris");
     glutDisplayFunc(Display);
     glutReshapeFunc(Reshape);
     
