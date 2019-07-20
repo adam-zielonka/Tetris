@@ -287,59 +287,20 @@ void Obruc()
 
 void PrzesunObiekt()
 {
-    obiekt[0][1]--; 
-    obiekt[1][1]--;
-    obiekt[2][1]--;
-    obiekt[3][1]--;
-   
-    if(isCanNotDraw(plan, obiekt))
-      {
-            obiekt[0][1]++; 
-            obiekt[1][1]++;
-            obiekt[2][1]++;
-            obiekt[3][1]++;
-            plan[obiekt[0][1]][obiekt[0][0]] = obiekt[0][2];
-            plan[obiekt[1][1]][obiekt[1][0]] = obiekt[1][2];
-            plan[obiekt[2][1]][obiekt[2][0]] = obiekt[2][2];
-            plan[obiekt[3][1]][obiekt[3][0]] = obiekt[3][2];
-            GenerujObjekt();   
-            GenerujNext();       
-      }
-    
+    if(moveFigureY(plan, obiekt)) {
+        GenerujObjekt();   
+        GenerujNext();    
+    }    
 }
 
 void PrzesunLewo()
 {
-    obiekt[0][0]--; 
-    obiekt[1][0]--;
-    obiekt[2][0]--;
-    obiekt[3][0]--;
-   
-    if(isCanNotDraw(plan, obiekt))
-      {
-            obiekt[0][0]++; 
-            obiekt[1][0]++;
-            obiekt[2][0]++;
-            obiekt[3][0]++;          
-      }
-    
+    moveFigureX(plan, obiekt, -1);
 }
 
 void PrzesunPrawo()
 {
-    obiekt[0][0]++; 
-    obiekt[1][0]++;
-    obiekt[2][0]++;
-    obiekt[3][0]++;
-   
-    if(isCanNotDraw(plan, obiekt))
-      {
-            obiekt[0][0]--; 
-            obiekt[1][0]--;
-            obiekt[2][0]--;
-            obiekt[3][0]--;          
-      }
-    
+    moveFigureX(plan, obiekt, +1);
 }
 
 void KasujLinie()

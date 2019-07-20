@@ -96,3 +96,29 @@ int drawRotate(int board[22][22], int figure[4][3], int id) {
     default: return id;
   }
 }
+
+void moveFigureX(int board[22][22], int figure[4][3], int sign = 1) {
+  for (int i = 0; i < 4; i++) {
+    figure[i][0] += sign;
+  }
+  if(isCanNotDraw(board, figure)) {
+    for (int i = 0; i < 4; i++) {
+      figure[i][0] -= sign;
+    }
+  }
+}
+
+bool moveFigureY(int board[22][22], int figure[4][3]) {
+  for (int i = 0; i < 4; i++) {
+    figure[i][1]--;
+  }
+  if(isCanNotDraw(board, figure)) {
+    for (int i = 0; i < 4; i++) {
+      figure[i][1]++;
+      board[figure[i][1]][figure[i][0]] = figure[i][2];
+    }
+    return true;
+  } else {
+    return false;
+  }
+}
