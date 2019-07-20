@@ -1,3 +1,4 @@
+/* Figures */
 const int SQUARE[4][2] = {
   {5, 20}, {5, 19}, {6, 20}, {6, 19}
 }; 
@@ -26,6 +27,7 @@ const int NOSE[4][2] = {
   {5, 20}, {5, 19}, {5, 18}, {6, 19}
 }; 
 
+/* Next figures */
 const int NEXT_SQUARE[4][2] = {
   {15, 7}, {15, 6}, {16, 7}, {16, 6}
 }; 
@@ -52,4 +54,42 @@ const int NEXT_MIRRORED_Z[4][2] = {
 
 const int NEXT_NOSE[4][2] = {
   {15, 7}, {15, 6}, {15, 5}, {16, 6}
+};
+
+/* Rotate figures */
+
+const int ROTATE_LINE[4][2] = {
+  {-1, -2}, {0, -1}, {+1, 0}, {+2, +1}
+};
+
+const int ROTATE_L_0[4][2] = {
+  {0, -2}, {+1, -1}, {+2, 0}, {+1, +1}
+};
+
+const int ROTATE_L_1[4][2] = {
+  {+2, 0}, {+1, +1}, {0, +2}, {-1, +1}
+};
+
+const int ROTATE_MIRRORED_L_0[4][2] = {
+  {-2, 0}, {-1, +1}, {0, +2}, {+1, +1}
+};
+
+const int ROTATE_MIRRORED_L_1[4][2] = {
+  {0, -2}, {-1, -1}, {-2, 0}, {-1, +1}
+};
+
+const int ROTATE_Z[4][2] = {
+  {+1, -1}, {0, 0}, {+1, +1}, {0, +2}
+};
+
+const int ROTATE_MIRRORED_Z[4][2] = {
+  {-1, +1}, {0, 0}, {+1, +1}, {+2, 0}
+};
+
+const int ROTATE_NOSE_0[4][2] = {
+  {0, -2}, {+1, -1}, {+2, 0}, {0, 0}
+};
+
+const int ROTATE_NOSE_1[4][2] = {
+  {+2, 0}, {+1, +1}, {0, +2}, {0, 0}
 };
