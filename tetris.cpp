@@ -19,19 +19,28 @@
 
 using namespace std;
  
-//Szybkos� spadania
-GLint speed= 1000;
-int menu = 0;
-int menuwyb = 0;
-int punkty = 0;
-char imie[64];
-int wpisywanie =0;
-int imieznkow =0;
-int wynikipunkty[6] = {0,0,0,0,0,0};
-char wynikiimie[6][64];
-char wynikippp[6][64];
+GLint speed = 1000;
 
-int plan[22][22] = {
+int menu = 0;
+int selectedMenuItem = 0;
+
+int points = 0;
+
+char playerName[64];
+int playerNameLength = 0;
+int typing = 0;
+
+int resultPoints[6] = {0,0,0,0,0,0};
+char resultNames[6][64];
+char resultCPoints[6][64];
+
+int figure[4][3];
+int nextFigure[4][3];
+
+int figureCode = 0;
+int nextFigureCode = 0;
+
+int board[22][22] = {
   {1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0},
   {1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0},
   {1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0},
@@ -56,7 +65,7 @@ int plan[22][22] = {
   {1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0}
 };
 
-int logo[20][20] = {
+int list[20][20] = {
   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
   {0,0,0,0,0,0,0,7,7,7,7,7,7,0,0,0,0,0,0,0},
   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -79,8 +88,7 @@ int logo[20][20] = {
   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
 };
 
-
-int pop[20][20] = {
+int popover[20][20] = {
   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -103,86 +111,8 @@ int pop[20][20] = {
   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
 };
 
-int obiekt[4][3] = {
-  {6,20,1},
-  {6,19,1},
-  {5,20,1},
-  {5,19,1}
-};
-int obiekt2[4][3] = {
-  {6,20,1},
-  {6,19,1},
-  {5,20,1},
-  {5,19,1}
-};
-
-int gen = 0;
-int nastepny = 0;
-
-void OdczytZPlku() {
-  readResultsFile(wynikiimie, wynikipunkty, wynikippp);
-}
-
-void ZapiszDoPliku() {
-  saveResultFile(wynikiimie, wynikipunkty, imie, punkty);
-  OdczytZPlku();
-  menu = 4;
-}
-
-void KoniecGry() {
-  if(punkty>wynikipunkty[5]) menu = 10;
-  else menu = 11;
-}
-
-void GenerujNext() {
-  nastepny = rand()%(0-7)+0;
-  drawNextFigure(obiekt2, nastepny);  
-}
-
-void GenerujObjekt() {
-  gen = nastepny;
-  drawFigure(obiekt, gen);
-
-  if(isCanNotDraw(plan, obiekt)) KoniecGry();
-}
-
-void Obruc() {
-  gen = drawRotate(plan, obiekt, gen);
-}
-
-void PrzesunObiekt() {
-  if(moveFigureY(plan, obiekt)) {
-    GenerujObjekt();
-    GenerujNext();
-  }    
-}
-
-void PrzesunLewo() {
-  moveFigureX(plan, obiekt, -1);
-}
-
-void PrzesunPrawo() {
-  moveFigureX(plan, obiekt, +1);
-}
-
-void KasujLinie() {
-  punkty += deleteLine(plan);
-}
-
 void renderBoard(Board board) {
   renderBoard(board.xy);
-}
-
-void Wypelni() {
-  renderBoard(drawBoard(plan, obiekt, obiekt2, menu, wpisywanie));
-}
-
-void Pomoc() {
-  renderBoard(drawBoard(pop));
-}
-
-void Logo() {    
-  renderBoard(drawBoard(logo, menu, menuwyb));
 }
 
 void renderTexts(vector<Text> texts) {
@@ -190,90 +120,141 @@ void renderTexts(vector<Text> texts) {
     renderText(texts[i].value, texts[i].x, texts[i].y);
 }
 
-void GameTekst() {
-  renderTexts(GameTexts(menu, wynikiimie[1], wynikippp[1], punkty));
+void ReadResults() {
+  readResultsFile(resultNames, resultPoints, resultCPoints);
 }
 
-void NowaGra() {
-  clearBoard(plan);
-  punkty = 0;
-  GenerujNext();
-  GenerujObjekt();   
-  GenerujNext(); 
+void SaveResults() {
+  saveResultFile(resultNames, resultPoints, playerName, points);
+  ReadResults();
+  menu = 4;
 }
 
-void Zapisz() {
-  wpisywanie = 1;
-  SaveTexts(imie);
+void GameOver() {
+  if(points>resultPoints[5]) menu = 10;
+  else menu = 11;
 }
 
-// funkcja generuj�ca scen� 3D
+void SetNextFigure() {
+  nextFigureCode = rand()%(0-7)+0;
+  drawNextFigure(nextFigure, nextFigureCode);  
+}
+
+void SetFigure() {
+  figureCode = nextFigureCode;
+  drawFigure(figure, figureCode);
+
+  if(isCanNotDraw(board, figure)) GameOver();
+}
+
+void RotateFigure() {
+  figureCode = drawRotate(board, figure, figureCode);
+}
+
+void MoveFigureDown() {
+  if(moveFigureY(board, figure)) {
+    SetFigure();
+    SetNextFigure();
+  }    
+}
+
+void MoveFigureLeft() {
+  moveFigureX(board, figure, -1);
+}
+
+void MoveFigureRight() {
+  moveFigureX(board, figure, +1);
+}
+
+void DeleteLines() {
+  points += deleteLine(board);
+}
+
+void RenderBoard() {
+  renderBoard(drawBoard(board, figure, nextFigure, menu, typing));
+}
+
+void RenderPopover() {
+  renderBoard(drawBoard(popover));
+}
+
+void RenderList() {    
+  renderBoard(drawBoard(list, menu, selectedMenuItem));
+}
+
+void RenderGameTexts() {
+  renderTexts(GameTexts(menu, resultNames[1], resultCPoints[1], points));
+}
+
+void NewGame() {
+  clearBoard(board);
+  points = 0;
+  SetNextFigure();
+  SetFigure();   
+  SetNextFigure(); 
+}
+
+void RenderSaveTexts() {
+  typing = 1;
+  renderTexts(SaveTexts(playerName));
+}
+
 void Display() {   
-  //Generowanie t�a
   glClearColor(1, 1, 1, 1);        
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   glEnable(GL_DEPTH_TEST);
 
-  if(menu == 1) {
-    KasujLinie();
-    Wypelni();
-    GameTekst();
-  }
-  
-  if(menu == 0) {
-    Logo();
+  if(menu == 0) { // Main Menu
+    RenderList();
     renderTexts(MainMenuTexts());
   }
+
+  if(menu == 1) { // Game
+    DeleteLines();
+    RenderBoard();
+    RenderGameTexts();
+  }
   
-  //Pomoc
-  if(menu == 2) {
-    Pomoc();
+  if(menu == 2) { // Help
+    RenderPopover();
     renderTexts(HelpTexts());
   }
-  //Ustawieni    
-  if(menu == 3) {
-    Pomoc();
+  
+  if(menu == 3) { // Settings
+    RenderPopover();
     renderTexts(SettingsTexts(speed));
   }
   
-  //Wyniki
-  if(menu == 4) {
-    Logo();
-    renderTexts(BestResultsTexts(wynikiimie, wynikippp));
+  if(menu == 4) { // Best Results
+    RenderList();
+    renderTexts(BestResultsTexts(resultNames, resultCPoints));
   }
   
-  //KoniecGry
-  if(menu == 10) {
-    Wypelni();
-    GameTekst();
-    Zapisz();
+  if(menu == 10) { // Game Over with result save 
+    RenderBoard();
+    RenderGameTexts();
+    RenderSaveTexts();
   }
   
-  if(menu == 11) {
-    Wypelni();
-    GameTekst();
+  if(menu == 11) { // Game Over
+    RenderBoard();
+    RenderGameTexts();
   }
 
-  if(menu == 22) {
-    Wypelni();
-    GameTekst();
-    PauseTexts();
+  if(menu == 22) { // Pause
+    RenderBoard();
+    RenderGameTexts();
+    renderTexts(PauseTexts());
   }
 
-  // skierowanie polece� do wykonania
-  glFlush();    
-  // zamiana bufor�w koloru
+  glFlush();
   glutSwapBuffers();
 }
 
 void Timer(int value) {   
-  if(menu == 1) {
-      PrzesunObiekt();  
-  } 
-  // wy�wietlenie sceny
-  Display();    
-  // nast�pne wywo�anie funkcji timera
+  if(menu == 1) MoveFigureDown();
+  Display();
   glutTimerFunc(speed, Timer, 0);
 }
 
@@ -292,7 +273,7 @@ void Reshape(int width, int height)
 }
 
 void Keyboard(unsigned char key, int x, int y) {   
-  OdczytZPlku();
+  ReadResults();
 
   if((key == 'P' || key == 'p') && menu == 1) {
     menu = 22;
@@ -312,10 +293,10 @@ void Keyboard(unsigned char key, int x, int y) {
   }  
 
   if(key == ' ' && menu == 0) {
-    switch(menuwyb) {  
+    switch(selectedMenuItem) {  
       case 0:
         menu = 1;
-        NowaGra();
+        NewGame();
         break; 
       case 1:
         menu = 2;
@@ -332,24 +313,24 @@ void Keyboard(unsigned char key, int x, int y) {
     }
   }
   
-  if(wpisywanie == 1 
+  if(typing == 1 
       && ((key >= 48 && key <= 57) || (key >= 65 && key <= 90) || (key >= 97 && key <=122)) 
-      && imieznkow <=10 ) {
+      && playerNameLength <=10 ) {
 
-      imie[imieznkow] = key;
-      imieznkow++;
+      playerName[playerNameLength] = key;
+      playerNameLength++;
   }
   
-  if(wpisywanie == 1 && key == 8 && imieznkow > 0) {
-      imieznkow--;
-      imie[imieznkow] = 0;
+  if(typing == 1 && key == 8 && playerNameLength > 0) {
+      playerNameLength--;
+      playerName[playerNameLength] = 0;
   }
   
-  if(key == 27 && wpisywanie == 1) {
+  if(key == 27 && typing == 1) {
       menu = 0;
-      wpisywanie = 0;
+      typing = 0;
       key = 0;
-      ZapiszDoPliku();
+      SaveResults();
   }
   else if(key == 27 && menu == 11) {
       menu = 4;
@@ -364,7 +345,7 @@ void Keyboard(unsigned char key, int x, int y) {
   Display();
 }
 
-void Znaki_Spec(int key, int x, int y) { 
+void SpecialChars(int key, int x, int y) { 
   if(key == GLUT_KEY_F1 && menu == 1) {
     menu = 2;
     key = 0;
@@ -378,16 +359,16 @@ void Znaki_Spec(int key, int x, int y) {
   if(menu == 1) {
     switch(key) {  
       case GLUT_KEY_UP:
-        Obruc();
+        RotateFigure();
         break; 
       case GLUT_KEY_DOWN:
-        PrzesunObiekt();
+        MoveFigureDown();
         break;  
       case GLUT_KEY_LEFT:
-        PrzesunLewo();
+        MoveFigureLeft();
         break; 
       case GLUT_KEY_RIGHT:
-        PrzesunPrawo();
+        MoveFigureRight();
         break; 
       case GLUT_KEY_END:
         menu = 0;
@@ -398,12 +379,12 @@ void Znaki_Spec(int key, int x, int y) {
   if(menu == 0) {
     switch(key) {  
       case GLUT_KEY_DOWN:
-        if(menuwyb == 4) menuwyb = 0;
-        else menuwyb++;
+        if(selectedMenuItem == 4) selectedMenuItem = 0;
+        else selectedMenuItem++;
         break; 
       case GLUT_KEY_UP:
-        if(menuwyb == 0) menuwyb = 4;
-        else menuwyb--;
+        if(selectedMenuItem == 0) selectedMenuItem = 4;
+        else selectedMenuItem--;
         break;  
       case GLUT_KEY_LEFT:
 
@@ -417,12 +398,11 @@ void Znaki_Spec(int key, int x, int y) {
     }
   }
   
-  //narysowanie sceny
   Display();
 } 
 
 int main(int argc, char * argv[]) {   
-  OdczytZPlku();
+  ReadResults();
   srand(time(NULL));
   glutInit(& argc, argv);
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
@@ -432,7 +412,7 @@ int main(int argc, char * argv[]) {
   glutReshapeFunc(Reshape);
   
   glutKeyboardFunc(Keyboard);
-  glutSpecialFunc(Znaki_Spec);    
+  glutSpecialFunc(SpecialChars);    
   glutTimerFunc(speed, Timer, 0);
   glutMainLoop();
   return 0;

@@ -1,4 +1,5 @@
 #include <vector>
+#include <string> 
 
 class Text {
   public:
@@ -12,11 +13,7 @@ class Text {
       y = _y;
     }
 
-    Text(int _number, int _x, int _y) {
-      char _text[64];
-      sprintf(_text, "%i", _number);
-      Text(_text, _x, _y);
-    }
+    Text(int _number, int _x, int _y) : Text(to_string(_number), _x, _y) {}
 };
 
 vector<Text> MainMenuTexts() {
