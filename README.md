@@ -19,7 +19,7 @@ This command has been checked in Ubuntu 18.10.
 ## Build & Run
 
 ```
-g++ -p -Wall -pedantic -o tetris.out tetris.cpp -lGL -lGLU -lglut -lm -std=c++0x 
+g++ -p -Wall -pedantic -o tetris.out tetris.cpp -lGL -lGLU -lglut -lm
 ```
 
 ```

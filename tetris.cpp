@@ -1,6 +1,6 @@
 //sudo add-apt-repository universe
 //sudo apt install mesa-common-dev libglu1-mesa-dev freeglut3-dev  -y
-//g++ -p -Wall -pedantic -o tetris.out tetris.cpp -lGL -lGLU -lglut -lm -std=c++0x 
+//g++ -p -Wall -pedantic -o tetris.out tetris.cpp -lGL -lGLU -lglut -lm
 //./tetris.out
 #include <stdlib.h>
 #include <math.h>
@@ -15,6 +15,7 @@
 #include "file.cpp"
 #include "texts.cpp"
 #include "board.cpp"
+#include "engine.cpp"
 
 using namespace std;
  
@@ -168,20 +169,29 @@ void KasujLinie() {
   punkty += deleteLine(plan);
 }
 
+void renderBoard(Board board) {
+  renderBoard(board.xy);
+}
+
 void Wypelni() {
-  drawBoard(plan, obiekt, obiekt2, menu, wpisywanie);
+  renderBoard(drawBoard(plan, obiekt, obiekt2, menu, wpisywanie));
 }
 
 void Pomoc() {
-  drawBoard(pop);
+  renderBoard(drawBoard(pop));
 }
 
 void Logo() {    
-  drawBoard(logo, menu, menuwyb);
+  renderBoard(drawBoard(logo, menu, menuwyb));
+}
+
+void renderTexts(vector<Text> texts) {
+  for (size_t i = 0; i < texts.size(); i++)
+    renderText(texts[i].value, texts[i].x, texts[i].y);
 }
 
 void GameTekst() {
-  GameTexts(menu, wynikiimie[1], wynikippp[1], punkty);
+  renderTexts(GameTexts(menu, wynikiimie[1], wynikippp[1], punkty));
 }
 
 void NowaGra() {
@@ -213,24 +223,24 @@ void Display() {
   
   if(menu == 0) {
     Logo();
-    MainMenuTexts();
+    renderTexts(MainMenuTexts());
   }
   
   //Pomoc
   if(menu == 2) {
     Pomoc();
-    HelpTexts();
+    renderTexts(HelpTexts());
   }
   //Ustawieni    
   if(menu == 3) {
     Pomoc();
-    SettingsTexts(speed);
+    renderTexts(SettingsTexts(speed));
   }
   
   //Wyniki
   if(menu == 4) {
     Logo();
-    BestResultsTexts(wynikiimie, wynikippp);
+    renderTexts(BestResultsTexts(wynikiimie, wynikippp));
   }
   
   //KoniecGry

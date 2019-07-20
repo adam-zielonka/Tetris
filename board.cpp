@@ -1,7 +1,9 @@
-#include "./engine/board.cpp"
+struct Board {
+  int xy[20][20];
+};
 
-void drawBoard(int board[22][22], int figure[4][3], int nextFigure[4][3], int menu, int typing) {
-  int printBoard[20][20];
+Board drawBoard(int board[22][22], int figure[4][3], int nextFigure[4][3], int menu, int typing) {
+  Board printBoard;
   
   for(int j = 1; j < 21; j++) {
     for(int i = 1; i < 21; i++) {
@@ -43,22 +45,19 @@ void drawBoard(int board[22][22], int figure[4][3], int nextFigure[4][3], int me
       if(typing == 1 && j == 13 && i > 12 && i < 19)
         color = 1;
         
-      printBoard[j-1][i-1] = color;
+      printBoard.xy[j-1][i-1] = color;
     }
   }
 
-  renderBoard(printBoard);
+  return printBoard;
 }
 
-void drawBoard(int board[20][20], int menu, int selectedItem) {
-  int printBoard[20][20];
+Board drawBoard(int board[20][20], int menu, int selectedItem) {
+  Board printBoard;
 
-  for(int j=0;j<20;j++) {    
-    for(int i=0;i<20;i++) {
-      int color = (i + j) % 2 == 0 ? 8 : 9;
-          
-      if(board[j][i] != 0)
-        color = board[j][i];
+  for(int j = 0; j < 20; j++) {
+    for(int i = 0; i < 20; i++) {
+      int color = board[j][i] != 0 ? board[j][i] : ((i + j) % 2 == 0 ? 8 : 9);
 
       if((board[j][i]==7 && selectedItem == 0 && j==9) ||
         (board[j][i]==7 && selectedItem == 1 && j==7) ||
@@ -74,26 +73,19 @@ void drawBoard(int board[20][20], int menu, int selectedItem) {
         (board[j][i]==7 && menu == 4 && j==1))
         color = 3;
       
-      printBoard[j][i] = color;
+      printBoard.xy[j][i] = color;
     }
   }
 
-  renderBoard(printBoard);
+  return printBoard;
 }
 
-void drawBoard(int board[20][20]) {
-  int printBoard[20][20];
+Board drawBoard(int board[20][20]) {
+  Board printBoard;
 
-  for(int j=0;j<20;j++) {
-    for(int i=0;i<20;i++) {
-      int color = (i + j) % 2 == 0 ? 8 : 9;
-          
-      if(board[j][i] != 0)
-        color = board[j][i];
-      
-      printBoard[j][i] = color;
-    }
-  }
+  for(int j = 0; j < 20; j++)
+    for(int i = 0; i < 20; i++)
+      printBoard.xy[j][i] = board[j][i] != 0 ? board[j][i] : ((i + j) % 2 == 0 ? 8 : 9);
 
-  renderBoard(printBoard);
+  return printBoard;
 }
