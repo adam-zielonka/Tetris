@@ -1,5 +1,6 @@
 #include <vector>
-#include <string> 
+#include <string>
+#include "i18n.cpp"
 
 class Text {
   public:
@@ -18,58 +19,60 @@ class Text {
 
 vector<Text> MainMenuTexts() {
   vector<Text> texts;
-  texts.push_back(Text("Nowa Gra", 250, 281));
-  texts.push_back(Text("Pomoc", 250, 225));
-  texts.push_back(Text("Ustawienia", 250, 168));
-  texts.push_back(Text("Wyniki", 250, 111));
-  texts.push_back(Text("Wyjscie", 250, 55));
+  texts.push_back(Text(i18n.MENU_NEW_GAME, 250, 281));
+  texts.push_back(Text(i18n.MENU_HELP, 250, 225));
+  texts.push_back(Text(i18n.MENU_SETTINGS, 250, 168));
+  texts.push_back(Text(i18n.MENU_RESULT, 250, 111));
+  texts.push_back(Text(i18n.MENU_EXIT, 250, 55));
   return texts;
 }
 
 vector<Text> GameTexts(int menu, char bestName[64], char bestPoints[64], int points) {
   vector<Text> texts;
-  texts.push_back(Text("Punkty", 390, 540));
+  texts.push_back(Text(i18n.GAME_POINTS, 390, 540));
   texts.push_back(Text(points, 460, 540));
   texts.push_back(Text(bestName, 370, 483));
   texts.push_back(Text(bestPoints, 490, 483));
   
   if(menu == 10) 
-    texts.push_back(Text("Podaj imie i koncz [ESC]", 332, 426));
+    texts.push_back(Text(i18n.GAME_OVER_WRITE_NAME, 332, 426));
   
   if(menu == 11)
-    texts.push_back(Text("Przegrales i koncz [ESC]", 332, 426));
+    texts.push_back(Text(i18n.GAME_OVER, 332, 426));
 
   return texts;
 }
 
 vector<Text> PauseTexts() {
   vector<Text> texts;
-  texts.push_back(Text("Pauza! Kliknij [P] i graj", 332, 426));
+  texts.push_back(Text(i18n.GAME_PAUSE, 332, 426));
   return texts;
 }
 
 vector<Text> HelpTexts() {
   vector<Text> texts;
-  texts.push_back(Text("Sterowanie:", 90, 280));
-  texts.push_back(Text("Strzalki:", 80, 256));
-  texts.push_back(Text("W gore - obrot", 80, 232));
-  texts.push_back(Text("W dol - opadanie", 80, 209));
-  texts.push_back(Text("W prawo", 80, 183));
-  texts.push_back(Text("W lewo", 80, 157));
+  texts.push_back(Text(i18n.HELP_CONTROLS, 90, 280));
+  texts.push_back(Text(i18n.HELP_ARROWS, 80, 256));
+  texts.push_back(Text(i18n.HELP_ARROW_UP, 80, 232));
+  texts.push_back(Text(i18n.HELP_ARROW_DOWN, 80, 209));
+  texts.push_back(Text(i18n.HELP_ARROW_RIGHT, 80, 183));
+  texts.push_back(Text(i18n.HELP_ARROW_LEFT, 80, 157));
   
-  texts.push_back(Text("Inne:", 250, 256));
-  texts.push_back(Text("[ESC] Wyjscie/Powrot", 250, 232));
-  texts.push_back(Text("[SPACJA] Wybor z Menu", 250, 209));
-  texts.push_back(Text("[F1] Pomoc", 250, 183));
-  texts.push_back(Text("[P] Pauza", 250, 157));
+  texts.push_back(Text(i18n.HELP_OTHERS, 250, 256));
+  texts.push_back(Text(i18n.HELP_ESC, 250, 232));
+  texts.push_back(Text(i18n.HELP_SPACE, 250, 209));
+  texts.push_back(Text(i18n.HELP_F1, 250, 183));
+  texts.push_back(Text(i18n.HELP_P, 250, 157));
   return texts;
 }
 
 vector<Text> SettingsTexts(int speed) {
   vector<Text> texts;
-  texts.push_back(Text("Ustawienia:", 90, 280));
-  texts.push_back(Text("Pretkosc [+][-]", 80, 256));
+  texts.push_back(Text(i18n.SETTINGS, 90, 280));
+  texts.push_back(Text(i18n.SETTINGS_SPEED, 80, 256));
   texts.push_back(Text(speed, 250, 256));
+  texts.push_back(Text(i18n.SETTINGS_LANG, 80, 232));
+  texts.push_back(Text(i18n.SETTINGS_LANG_VALUE, 250, 232));
   return texts;
 }
 

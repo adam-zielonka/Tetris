@@ -290,7 +290,11 @@ void Keyboard(unsigned char key, int x, int y) {
 
   if(key == '-' && speed>0) {
     speed-=100;
-  }  
+  }
+
+  if(key == 'L' || key == 'l') {
+    switchLang();
+  }
 
   if(key == ' ' && menu == 0) {
     switch(selectedMenuItem) {  

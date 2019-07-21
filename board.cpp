@@ -7,10 +7,7 @@ Board drawBoard(int board[22][22], int figure[4][3], int nextFigure[4][3], int m
   
   for(int j = 1; j < 21; j++) {
     for(int i = 1; i < 21; i++) {
-      int color = (i + j) % 2 == 0 ? 8 : 9;
-        
-      if(board[j][i] != 0)
-        color = board[j][i];
+      int color = board[j][i] != 0 ? board[j][i] : ((i + j) % 2 == 0 ? 8 : 9);
       
       if((i + j) % 2 == 0 && i > 10)
         color = 10; 
