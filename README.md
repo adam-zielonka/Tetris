@@ -6,11 +6,8 @@ In June 2015, I was finishing my second year of my studies and I prepared this g
 
 To build this game, you need: `g++` and `OpenGL` libraries (`gl.h`, `glu.h`, `glut.h`).
 
-```
+```shell
 $ sudo add-apt-repository universe
-```
-
-```
 $ sudo apt install g++ mesa-common-dev libglu1-mesa-dev freeglut3-dev -y
 ```
 
@@ -18,7 +15,7 @@ This command has been checked in Ubuntu 18.10.
 
 ## Build & Run
 
-```
+```shell
 $ g++ -o tetris.out tetris.cpp -lGL -lGLU -lglut -lm
 $ ./tetris.out
 ```
@@ -26,7 +23,7 @@ $ ./tetris.out
 ## Run on WSL
 
 On WSL:
-```
+```shell
 $ sudo apt install ubuntu-desktop mesa-utils
 $ export DISPLAY=localhost:0
 ```
@@ -40,7 +37,7 @@ On Windows:
 
 After everything, on WSL:
 
-```
+```shell
 $ ./tetris.out
 ```
 
