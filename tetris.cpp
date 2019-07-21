@@ -1,7 +1,3 @@
-//sudo add-apt-repository universe
-//sudo apt install mesa-common-dev libglu1-mesa-dev freeglut3-dev  -y
-//g++ -p -Wall -pedantic -o tetris.out tetris.cpp -lGL -lGLU -lglut -lm
-//./tetris.out
 #include <stdlib.h>
 #include <math.h>
 #include <stdio.h>
@@ -17,8 +13,6 @@
 #include "board.cpp"
 #include "engine.cpp"
 
-using namespace std;
- 
 GLint speed = 1000;
 
 int menu = 0;
@@ -111,21 +105,23 @@ int popover[20][20] = {
   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
 };
 
-void renderBoard(Board board) {
-  renderBoard(board.xy);
-}
+namespace Support {
+  void renderBoard(Board::Board board) {
+    Engine::renderBoard(board.xy);
+  }
 
-void renderTexts(vector<Text> texts) {
-  for (size_t i = 0; i < texts.size(); i++)
-    renderText(texts[i].value, texts[i].x, texts[i].y);
+  void renderTexts(vector<Texts::Text> texts) {
+    for (size_t i = 0; i < texts.size(); i++)
+      Engine::renderText(texts[i].value, texts[i].x, texts[i].y);
+  }
 }
 
 void ReadResults() {
-  readResultsFile(resultNames, resultPoints, resultCPoints);
+  File::readResultsFile(resultNames, resultPoints, resultCPoints);
 }
 
 void SaveResults() {
-  saveResultFile(resultNames, resultPoints, playerName, points);
+  File::saveResultFile(resultNames, resultPoints, playerName, points);
   ReadResults();
   menu = 4;
 }
@@ -137,57 +133,57 @@ void GameOver() {
 
 void SetNextFigure() {
   nextFigureCode = rand()%(0-7)+0;
-  drawNextFigure(nextFigure, nextFigureCode);  
+  Utils::drawNextFigure(nextFigure, nextFigureCode);  
 }
 
 void SetFigure() {
   figureCode = nextFigureCode;
-  drawFigure(figure, figureCode);
+  Utils::drawFigure(figure, figureCode);
 
-  if(isCanNotDraw(board, figure)) GameOver();
+  if(Utils::isCanNotDraw(board, figure)) GameOver();
 }
 
 void RotateFigure() {
-  figureCode = drawRotate(board, figure, figureCode);
+  figureCode = Utils::drawRotate(board, figure, figureCode);
 }
 
 void MoveFigureDown() {
-  if(moveFigureY(board, figure)) {
+  if(Utils::moveFigureY(board, figure)) {
     SetFigure();
     SetNextFigure();
   }    
 }
 
 void MoveFigureLeft() {
-  moveFigureX(board, figure, -1);
+  Utils::moveFigureX(board, figure, -1);
 }
 
 void MoveFigureRight() {
-  moveFigureX(board, figure, +1);
+  Utils::moveFigureX(board, figure, +1);
 }
 
 void DeleteLines() {
-  points += deleteLine(board);
+  points += Utils::deleteLine(board);
 }
 
 void RenderBoard() {
-  renderBoard(drawBoard(board, figure, nextFigure, menu, typing));
+  Support::renderBoard(Board::drawBoard(board, figure, nextFigure, menu, typing));
 }
 
 void RenderPopover() {
-  renderBoard(drawBoard(popover));
+  Support::renderBoard(Board::drawBoard(popover));
 }
 
 void RenderList() {    
-  renderBoard(drawBoard(list, menu, selectedMenuItem));
+  Support::renderBoard(Board::drawBoard(list, menu, selectedMenuItem));
 }
 
 void RenderGameTexts() {
-  renderTexts(GameTexts(menu, resultNames[1], resultCPoints[1], points));
+  Support::renderTexts(Texts::GameTexts(menu, resultNames[1], resultCPoints[1], points));
 }
 
 void NewGame() {
-  clearBoard(board);
+  Utils::clearBoard(board);
   points = 0;
   SetNextFigure();
   SetFigure();   
@@ -196,7 +192,7 @@ void NewGame() {
 
 void RenderSaveTexts() {
   typing = 1;
-  renderTexts(SaveTexts(playerName));
+  Support::renderTexts(Texts::SaveTexts(playerName));
 }
 
 void Display() {   
@@ -207,7 +203,7 @@ void Display() {
 
   if(menu == 0) { // Main Menu
     RenderList();
-    renderTexts(MainMenuTexts());
+    Support::renderTexts(Texts::MainMenuTexts());
   }
 
   if(menu == 1) { // Game
@@ -218,17 +214,17 @@ void Display() {
   
   if(menu == 2) { // Help
     RenderPopover();
-    renderTexts(HelpTexts());
+    Support::renderTexts(Texts::HelpTexts());
   }
   
   if(menu == 3) { // Settings
     RenderPopover();
-    renderTexts(SettingsTexts(speed));
+    Support::renderTexts(Texts::SettingsTexts(speed));
   }
   
   if(menu == 4) { // Best Results
     RenderList();
-    renderTexts(BestResultsTexts(resultNames, resultCPoints));
+    Support::renderTexts(Texts::BestResultsTexts(resultNames, resultCPoints));
   }
   
   if(menu == 10) { // Game Over with result save 
@@ -245,7 +241,7 @@ void Display() {
   if(menu == 22) { // Pause
     RenderBoard();
     RenderGameTexts();
-    renderTexts(PauseTexts());
+    Support::renderTexts(Texts::PauseTexts());
   }
 
   glFlush();
@@ -293,7 +289,7 @@ void Keyboard(unsigned char key, int x, int y) {
   }
 
   if(key == 'L' || key == 'l') {
-    switchLang();
+    I18N::switchLang();
   }
 
   if(key == ' ' && menu == 0) {
@@ -349,7 +345,7 @@ void Keyboard(unsigned char key, int x, int y) {
   Display();
 }
 
-void SpecialChars(int key, int x, int y) { 
+void SpecialKeys(int key, int x, int y) { 
   if(key == GLUT_KEY_F1 && menu == 1) {
     menu = 2;
     key = 0;
@@ -416,7 +412,7 @@ int main(int argc, char * argv[]) {
   glutReshapeFunc(Reshape);
   
   glutKeyboardFunc(Keyboard);
-  glutSpecialFunc(SpecialChars);    
+  glutSpecialFunc(SpecialKeys);    
   glutTimerFunc(speed, Timer, 0);
   glutMainLoop();
   return 0;
