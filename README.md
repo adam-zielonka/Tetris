@@ -7,11 +7,11 @@ In June 2015, I was finishing my second year of my studies and I prepared this g
 To build this game, you need: `g++` and `OpenGL` libraries (`gl.h`, `glu.h`, `glut.h`).
 
 ```
-sudo add-apt-repository universe
+$ sudo add-apt-repository universe
 ```
 
 ```
-sudo apt install g++ mesa-common-dev libglu1-mesa-dev freeglut3-dev -y
+$ sudo apt install g++ mesa-common-dev libglu1-mesa-dev freeglut3-dev -y
 ```
 
 This command has been checked in Ubuntu 18.10.
@@ -19,14 +19,30 @@ This command has been checked in Ubuntu 18.10.
 ## Build & Run
 
 ```
-g++ -p -Wall -pedantic -o tetris.out tetris.cpp -lGL -lGLU -lglut -lm
-```
-
-```
-./tetris.out
+$ g++ -o tetris.out tetris.cpp -lGL -lGLU -lglut -lm
+$ ./tetris.out
 ```
 
 ## Run on WSL
+
+On WSL:
+```
+$ sudo apt install ubuntu-desktop mesa-utils
+$ export DISPLAY=localhost:0
+```
+
+On Windows:
+- Install & Run [VcXsrv](https://sourceforge.net/projects/vcxsrv/)
+- Choose: Multiple windows
+- Display number: 0
+- Start no client
+- Disable: Native OpenGL
+
+After everything, on WSL:
+
+```
+$ ./tetris.out
+```
 
 You can find more on this link: [Does WSL support openGL?](https://github.com/microsoft/WSL/issues/2855#issuecomment-358861903)
 
