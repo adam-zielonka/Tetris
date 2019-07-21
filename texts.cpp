@@ -2,6 +2,8 @@
 #include <string>
 #include "i18n.cpp"
 
+using namespace std;
+
 namespace Texts {
   class Text {
     public:
