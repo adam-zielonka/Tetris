@@ -22,12 +22,6 @@ $ ./tetris.out
 
 ## Run on WSL
 
-On WSL:
-```shell
-$ sudo apt install ubuntu-desktop mesa-utils
-$ export DISPLAY=localhost:0
-```
-
 On Windows:
 - Install & Run [VcXsrv](https://sourceforge.net/projects/vcxsrv/)
 - Choose: Multiple windows
@@ -35,9 +29,10 @@ On Windows:
 - Start no client
 - Disable: Native OpenGL
 
-After everything, on WSL:
+After this, on WSL:
 
 ```shell
+$ export DISPLAY=localhost:0
 $ ./tetris.out
 ```
 
