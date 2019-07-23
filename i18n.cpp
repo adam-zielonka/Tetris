@@ -93,7 +93,7 @@ namespace I18N {
     return i18n;
   }
 
-  I18N i18n = getEN(i18n);
+  I18N i18n = getEN(I18N());
   bool lang = true;
 
   void switchLang() {
