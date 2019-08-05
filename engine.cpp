@@ -64,4 +64,16 @@ namespace Engine {
     glMatrixMode(GL_MODELVIEW);
     glPopMatrix();
   }
+
+  void Reshape(int width, int height){
+    glViewport(0, 0, width, height);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(70, 1, 1, 100);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    gluLookAt(0, 0, 1.5, 0, 0, 0, 0, 1, 0);
+  }
 }

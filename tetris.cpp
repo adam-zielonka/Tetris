@@ -7,6 +7,7 @@
 #include <iostream>
 #include <ctime>
 #include <cstring>
+#include <functional>
 #include "utils.cpp"
 #include "file.cpp"
 #include "texts.cpp"
@@ -195,12 +196,7 @@ void RenderSaveTexts() {
   Support::renderTexts(Texts::SaveTexts(playerName));
 }
 
-void Display() {   
-  glClearColor(1, 1, 1, 1);        
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-  glEnable(GL_DEPTH_TEST);
-
+void MainLoop() {
   if(menu == 0) { // Main Menu
     RenderList();
     Support::renderTexts(Texts::MainMenuTexts());
@@ -243,29 +239,10 @@ void Display() {
     RenderGameTexts();
     Support::renderTexts(Texts::PauseTexts());
   }
-
-  glFlush();
-  glutSwapBuffers();
 }
 
-void Timer(int value) {   
+void Timer() {   
   if(menu == 1) MoveFigureDown();
-  Display();
-  glutTimerFunc(speed, Timer, 0);
-}
-
-void Reshape(int width, int height)
-{ 
-  glViewport(0, 0, width, height);
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-  gluPerspective(70, 1, 1, 100);
-
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
-
-  gluLookAt(0, 0, 1.5, 0, 0, 0, 0, 1, 0);
-  Display();
 }
 
 void Keyboard(unsigned char key, int x, int y) {   
@@ -341,8 +318,6 @@ void Keyboard(unsigned char key, int x, int y) {
   else if(key == 27) {
       menu = 0;
   }
-  
-  Display();
 }
 
 void SpecialKeys(int key, int x, int y) { 
@@ -397,23 +372,51 @@ void SpecialKeys(int key, int x, int y) {
         break; 
     }
   }
-  
-  Display();
 } 
+
+void InitEngine(int argc, char * argv[]) {
+
+  auto display = []() {   
+    glClearColor(1, 1, 1, 1);        
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glEnable(GL_DEPTH_TEST);
+
+    MainLoop();
+
+    glFlush();
+    glutSwapBuffers();
+  };
+  static std::function<void()> display_bounce = [&]() { display(); };
+
+  auto reshape = [](int width, int height) { Engine::Reshape(width, height); display_bounce(); };
+  auto specialKeys = [](int key, int x, int y) { SpecialKeys(key, x, y); display_bounce(); };
+  auto keyboard = [](unsigned char key, int x, int y) { Keyboard(key, x, y); display_bounce(); };
+
+  static std::function<void()> timer_bounce;
+  auto timer = [](int ms) { timer_bounce(); };
+  timer_bounce = [&]() {
+    Timer();
+    display();
+    glutTimerFunc(speed, timer, 0);
+  };
+
+  glutInit(&argc, argv);
+  glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+  glutInitWindowSize(600, 600);
+  glutCreateWindow("Tetris");
+  glutDisplayFunc(display);
+  glutReshapeFunc(reshape);
+  
+  glutKeyboardFunc(keyboard);
+  glutSpecialFunc(specialKeys);    
+  glutTimerFunc(speed, timer, 0);
+  glutMainLoop();
+}
 
 int main(int argc, char * argv[]) {   
   ReadResults();
   srand(time(NULL));
-  glutInit(& argc, argv);
-  glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-  glutInitWindowSize(600, 600);
-  glutCreateWindow("Tetris");
-  glutDisplayFunc(Display);
-  glutReshapeFunc(Reshape);
-  
-  glutKeyboardFunc(Keyboard);
-  glutSpecialFunc(SpecialKeys);    
-  glutTimerFunc(speed, Timer, 0);
-  glutMainLoop();
+  InitEngine(argc, argv);
   return 0;
 }
