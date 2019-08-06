@@ -76,4 +76,49 @@ namespace Engine {
 
     gluLookAt(0, 0, 1.5, 0, 0, 0, 0, 1, 0);
   }
+
+  void Init(int argc, char * argv[], GLint * speed, void (* MainLoop)(void), void (* Timer)(void),
+    void (* Keyboard)(unsigned char, int, int),  void (* SpecialKeys)(int, int, int)) {
+
+    static function<void()> mainLoop = [&]() { MainLoop(); };
+    static function<void(unsigned char, int , int)> keyboard_bounce = [&](unsigned char key, int x, int y) { Keyboard(key, x, y); };
+    static function<void(int, int , int)> special_keys_bounce = [&](int key, int x, int y) { SpecialKeys(key, x, y); };
+    
+    auto display = []() {   
+      glClearColor(1, 1, 1, 1);        
+      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+      glEnable(GL_DEPTH_TEST);
+
+      mainLoop();
+
+      glFlush();
+      glutSwapBuffers();
+    };
+    static std::function<void()> display_bounce = [&]() { display(); };
+
+    auto reshape = [](int width, int height) { Engine::Reshape(width, height); display_bounce(); };
+    auto specialKeys = [](int key, int x, int y) { special_keys_bounce(key, x, y); display_bounce(); };
+    auto keyboard = [](unsigned char key, int x, int y) { keyboard_bounce(key, x, y); display_bounce(); };
+
+    static std::function<void()> timer_bounce;
+    auto timer = [](int ms) { timer_bounce(); };
+    timer_bounce = [&]() {
+      Timer();
+      display();
+      glutTimerFunc(*speed, timer, 0);
+    };
+
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+    glutInitWindowSize(600, 600);
+    glutCreateWindow("Tetris");
+    glutDisplayFunc(display);
+    glutReshapeFunc(reshape);
+    
+    glutKeyboardFunc(keyboard);
+    glutSpecialFunc(specialKeys);    
+    glutTimerFunc(*speed, timer, 0);
+    glutMainLoop();
+  }
 }
