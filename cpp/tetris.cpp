@@ -14,9 +14,20 @@
 #include "board.cpp"
 #include "engine.cpp"
 
+enum MENU {
+  MAIN_MENU = 0,
+  GAME = 1,
+  HELP = 2,
+  SETTINGS = 3,
+  RESULTS = 4,
+  GAME_OVER_WITH_RESULT_SAVE = 10,
+  GAME_OVER = 11,
+  PAUSE = 22,
+};
+
 GLint speed = 1000;
 
-int menu = 0;
+int menu = MAIN_MENU;
 int selectedMenuItem = 0;
 
 int points = 0;
@@ -124,12 +135,12 @@ void ReadResults() {
 void SaveResults() {
   File::saveResultFile(resultNames, resultPoints, playerName, points);
   ReadResults();
-  menu = 4;
+  menu = RESULTS;
 }
 
 void GameOver() {
-  if(points>resultPoints[5]) menu = 10;
-  else menu = 11;
+  if(points>resultPoints[5]) menu = GAME_OVER_WITH_RESULT_SAVE;
+  else menu = GAME_OVER;
 }
 
 void SetNextFigure() {
@@ -197,44 +208,44 @@ void RenderSaveTexts() {
 }
 
 void MainLoop() {
-  if(menu == 0) { // Main Menu
+  if(menu == MAIN_MENU) {
     RenderList();
     Support::renderTexts(Texts::MainMenuTexts());
   }
 
-  if(menu == 1) { // Game
+  if(menu == GAME) {
     DeleteLines();
     RenderBoard();
     RenderGameTexts();
   }
   
-  if(menu == 2) { // Help
+  if(menu == HELP) {
     RenderPopover();
     Support::renderTexts(Texts::HelpTexts());
   }
   
-  if(menu == 3) { // Settings
+  if(menu == SETTINGS) {
     RenderPopover();
     Support::renderTexts(Texts::SettingsTexts(speed));
   }
   
-  if(menu == 4) { // Best Results
+  if(menu == RESULTS) {
     RenderList();
     Support::renderTexts(Texts::BestResultsTexts(resultNames, resultCPoints));
   }
   
-  if(menu == 10) { // Game Over with result save 
+  if(menu == GAME_OVER_WITH_RESULT_SAVE) {
     RenderBoard();
     RenderGameTexts();
     RenderSaveTexts();
   }
   
-  if(menu == 11) { // Game Over
+  if(menu == GAME_OVER) {
     RenderBoard();
     RenderGameTexts();
   }
 
-  if(menu == 22) { // Pause
+  if(menu == PAUSE) {
     RenderBoard();
     RenderGameTexts();
     Support::renderTexts(Texts::PauseTexts());
@@ -242,19 +253,19 @@ void MainLoop() {
 }
 
 void Timer() {   
-  if(menu == 1) MoveFigureDown();
+  if(menu == GAME) MoveFigureDown();
 }
 
 void Keyboard(unsigned char key, int x, int y) {   
   ReadResults();
 
-  if((key == 'P' || key == 'p') && menu == 1) {
-    menu = 22;
-    key=0;
+  if((key == 'P' || key == 'p') && menu == GAME) {
+    menu = PAUSE;
+    key = 0;
   }
 
-  if((key == 'P' || key == 'p') && menu == 22) {
-    menu = 1;
+  if((key == 'P' || key == 'p') && menu == PAUSE) {
+    menu = GAME;
   }
 
   if(key == '+' && speed<2000) {
@@ -269,20 +280,20 @@ void Keyboard(unsigned char key, int x, int y) {
     I18N::switchLang();
   }
 
-  if(key == ' ' && menu == 0) {
+  if(key == ' ' && menu == MAIN_MENU) {
     switch(selectedMenuItem) {  
       case 0:
-        menu = 1;
+        menu = GAME;
         NewGame();
         break; 
       case 1:
-        menu = 2;
+        menu = HELP;
         break; 
       case 2:
-        menu = 3;
+        menu = SETTINGS;
         break; 
       case 3:
-        menu = 4;
+        menu = RESULTS;
         break; 
       case 4:
         exit(0);
@@ -304,34 +315,34 @@ void Keyboard(unsigned char key, int x, int y) {
   }
   
   if(key == 27 && typing == 1) {
-      menu = 0;
+      menu = MAIN_MENU;
       typing = 0;
       key = 0;
       SaveResults();
   }
-  else if(key == 27 && menu == 11) {
-      menu = 4;
+  else if(key == 27 && menu == GAME_OVER) {
+      menu = RESULTS;
   }
-  else if(key == 27 && menu == 0) {
+  else if(key == 27 && menu == MAIN_MENU) {
       exit( 0 );
   }
   else if(key == 27) {
-      menu = 0;
+      menu = MAIN_MENU;
   }
 }
 
 void SpecialKeys(int key, int x, int y) { 
-  if(key == GLUT_KEY_F1 && menu == 1) {
-    menu = 2;
+  if(key == GLUT_KEY_F1 && menu == GAME) {
+    menu = HELP;
     key = 0;
   }
   
-  if(key == GLUT_KEY_F1 && menu == 2) {
-    menu = 1;
+  if(key == GLUT_KEY_F1 && menu == HELP) {
+    menu = GAME;
     key = 0;
   }
 
-  if(menu == 1) {
+  if(menu == GAME) {
     switch(key) {  
       case GLUT_KEY_UP:
         RotateFigure();
@@ -346,12 +357,12 @@ void SpecialKeys(int key, int x, int y) {
         MoveFigureRight();
         break; 
       case GLUT_KEY_END:
-        menu = 0;
+        menu = MAIN_MENU;
         key = 0;      
         break; 
     }
   }
-  if(menu == 0) {
+  if(menu == MAIN_MENU) {
     switch(key) {  
       case GLUT_KEY_DOWN:
         if(selectedMenuItem == 4) selectedMenuItem = 0;
@@ -360,13 +371,7 @@ void SpecialKeys(int key, int x, int y) {
       case GLUT_KEY_UP:
         if(selectedMenuItem == 0) selectedMenuItem = 4;
         else selectedMenuItem--;
-        break;  
-      case GLUT_KEY_LEFT:
-
-        break; 
-      case GLUT_KEY_RIGHT:
-
-        break; 
+        break;
       case GLUT_KEY_END:
         exit(0);        
         break; 
