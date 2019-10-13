@@ -8,7 +8,7 @@ To build this game, you need: `g++` and `OpenGL` libraries (`gl.h`, `glu.h`, `gl
 
 ```shell
 $ sudo add-apt-repository universe
-$ sudo apt install g++ mesa-common-dev libglu1-mesa-dev freeglut3-dev -y
+$ sudo apt update && sudo apt install g++ mesa-common-dev libglu1-mesa-dev freeglut3-dev -y
 ```
 
 This command has been checked in Ubuntu 18.10.
@@ -40,12 +40,12 @@ You can find more on this link: [Does WSL support openGL?](https://github.com/mi
 
 ## Screens
 
-![](./img/tetris-menu.png)
-![](./img/tetris-game.png)
-![](./img/tetris-end.png)
-![](./img/tetris-results.png)
-![](./img/tetris-help.png)
-![](./img/tetris-settings.png)
+![](./docs/tetris-menu.png)
+![](./docs/tetris-game.png)
+![](./docs/tetris-end.png)
+![](./docsimg/tetris-results.png)
+![](./docs/tetris-help.png)
+![](./docs/tetris-settings.png)
 
 ## License
 MIT
