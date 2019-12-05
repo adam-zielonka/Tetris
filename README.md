@@ -43,7 +43,7 @@ You can find more on this link: [Does WSL support openGL?](https://github.com/mi
 ![](./docs/tetris-menu.png)
 ![](./docs/tetris-game.png)
 ![](./docs/tetris-end.png)
-![](./docsimg/tetris-results.png)
+![](./docs/tetris-results.png)
 ![](./docs/tetris-help.png)
 ![](./docs/tetris-settings.png)
 
