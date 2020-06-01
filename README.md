@@ -28,15 +28,23 @@ On Windows:
 - Display number: 0
 - Start no client
 - Disable: Native OpenGL
+- (WSL2) Enable: Disable access control
 
-After this, on WSL:
+After this, on WSL1:
 
 ```shell
 $ export DISPLAY=localhost:0
 $ ./tetris.out
 ```
 
-You can find more on this link: [Does WSL support openGL?](https://github.com/microsoft/WSL/issues/2855#issuecomment-358861903)
+on WSL2
+```shell
+$ export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0.0
+$ ./tetris.out
+```
+
+You can find more on this link: [Does WSL support openGL?](https://github.com/microsoft/WSL/issues/2855#issuecomment-358861903) and [Can't use X-Server in WSL 2
+](https://github.com/microsoft/WSL/issues/4106)
 
 ## Screens
 
